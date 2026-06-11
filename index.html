@@ -90,6 +90,9 @@
       </div>
 
       <h2 style="margin-top:10px">🔑 비밀번호 관리</h2>
+      <div class="data-bar" style="justify-content:flex-start;margin-bottom:10px">
+        <button class="action-btn btn-red btn-sm" onclick="resetAllPasswordsToDefault()">비밀번호 기본값으로 초기화</button>
+      </div>
       <div class="input-row">
         <input type="password" id="newStudentPw" placeholder="새 학생 운영자 비밀번호">
         <button class="action-btn btn-blue" onclick="changePassword('student')">학생 비밀번호 변경</button>
@@ -153,11 +156,11 @@ function login(){
       return;
     }
 
-    if(pw===String(passwords.teacher)){role="teacher";}
-    else if(pw===String(passwords.student)){role="student";} // 금고·마트·재고 통합
-    else if(pw===String(passwords.tooth)){role="tooth";}
-    else if(pw===String(passwords.milk)){role="milk";}
-    else if(pw===String(passwords.lunch)){role="lunch";}
+    if(pw===String(passwords.teacher)||pw===String(DEFAULT_TEACHER_PW)){role="teacher";}
+    else if(pw===String(passwords.student)||pw===String(DEFAULT_STUDENT_PW)){role="student";} // 금고·마트·재고 통합
+    else if(pw===String(passwords.tooth)||pw===String(DEFAULT_TOOTH_PW)){role="tooth";}
+    else if(pw===String(passwords.milk)||pw===String(DEFAULT_MILK_PW)){role="milk";}
+    else if(pw===String(passwords.lunch)||pw===String(DEFAULT_LUNCH_PW)){role="lunch";}
     else{
       if(err)err.textContent="비밀번호가 틀렸습니다.";
       return;
@@ -332,6 +335,20 @@ function renderPaymentRequests(){const box=document.getElementById('paymentReque
 function processPaymentRequest(id){const req=paymentRequests.find(r=>r.id===id);if(!req)return;if(!confirm(`${req.title}\n총 ${Number(req.totalAmount||0).toLocaleString()}오구를 지급 완료 처리할까요?`))return;const updates={};(req.items||[]).forEach(item=>{const logId=newId(),bills=amountToBills(Number(item.amount||0));updates['vaultLogs/'+logId]={id:logId,date:today(),student:item.student,desc:req.title+' - '+item.reason,type:'expense',...bills,amount:Number(item.amount||0),createdAt:Date.now()+Math.floor(Math.random()*100000)}});updates['paymentRequests/'+id+'/status']='done';updates['paymentRequests/'+id+'/processedAt']=Date.now();db.ref().update(updates)}
 function amountToBills(amount){let rest=amount,b1000=Math.floor(rest/1000);rest%=1000;let b500=Math.floor(rest/500);rest%=500;let b100=Math.floor(rest/100);return {b1000,b500,b100}}
 function shortDate(iso){const [y,m,d]=String(iso).split('-');return Number(m)+'/'+Number(d)}
+function resetAllPasswordsToDefault(){
+  if(role!=='teacher'){alert('교사만 초기화할 수 있습니다.');return}
+  if(!confirm('모든 비밀번호를 기본값으로 되돌릴까요?\n교사 8933 / 통합운영 1234 / 양치 4101 / 우유 4102 / 급식 4103'))return;
+  const defaults={
+    teacher:DEFAULT_TEACHER_PW,
+    student:DEFAULT_STUDENT_PW,
+    tooth:DEFAULT_TOOTH_PW,
+    milk:DEFAULT_MILK_PW,
+    lunch:DEFAULT_LUNCH_PW
+  };
+  db.ref('config/passwords').set(defaults);
+  passwords=defaults;
+  alert('비밀번호를 기본값으로 초기화했습니다.');
+}
 function changePassword(which){
   if(role!=='teacher'){alert('교사만 변경할 수 있습니다.');return}
   const idMap={
