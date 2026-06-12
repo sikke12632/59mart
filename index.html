@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>오구 운영센터</title>
-<!-- 2026-06-12-auth-safe-v1 -->
+<!-- 2026-06-12-auth-safe-v2-seed-month -->
 <style>
 :root{--primary:#2b6cb0;--amber:#ed8936;--teal:#38a169;--purple:#805ad5;--danger:#e53e3e;--bg:#f0f4f8;--box:#fff;--text:#2d3748;--muted:#718096;--border:#e2e8f0;--radius:10px}*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}button{cursor:pointer;font-family:inherit;border:none;border-radius:6px;font-weight:bold}button:hover{opacity:.86}input,select{font-family:inherit;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--text)}input:focus,select:focus{outline:2px solid var(--primary);outline-offset:1px}#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#ebf8ff 0%,#fffaf0 100%)}.login-box{background:var(--box);border-radius:16px;padding:46px 38px;box-shadow:0 8px 32px rgba(0,0,0,.12);width:360px;text-align:center}.login-logo{font-size:48px;margin-bottom:8px}.login-title{font-size:24px;font-weight:bold;color:var(--primary);margin-bottom:4px}.login-sub{font-size:13px;color:var(--muted);margin-bottom:24px}.login-box input{width:100%;margin-bottom:12px;text-align:center;letter-spacing:3px}.login-btn{width:100%;padding:12px;font-size:16px;background:var(--primary);color:#fff}.login-error{color:var(--danger);font-size:13px;margin-top:8px;min-height:18px}.login-hint{font-size:12px;color:var(--muted);margin-top:14px}#appScreen{display:none;min-height:100vh}.app-header{background:var(--box);padding:0 18px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;position:sticky;top:0;z-index:100}.app-logo{font-size:15px;font-weight:bold;color:var(--primary);padding:16px 16px 16px 0;white-space:nowrap;border-right:1px solid var(--border);margin-right:8px}.tab-nav{display:flex;flex:1;overflow-x:auto}.tab-btn{padding:16px 18px;font-size:14px;color:var(--muted);background:none;border-bottom:3px solid transparent;border-radius:0;white-space:nowrap}.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}.logout-btn{padding:8px 14px;background:#edf2f7;color:var(--text);font-size:12px;margin-left:8px;white-space:nowrap}.status{font-size:11px;padding:4px 9px;border-radius:99px;margin-left:8px;white-space:nowrap;font-weight:bold}.online{background:#c6f6d5;color:#276749}.offline{background:#fed7d7;color:#9b2c2c}.syncing{background:#bee3f8;color:#2a69ac}.tab-content{display:none;padding:24px;max-width:980px;margin:0 auto}.tab-content.active{display:block}.section,.card{background:var(--box);border-radius:var(--radius);padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:20px}.section h2{font-size:15px;color:var(--muted);margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}.dash-card{background:var(--box);border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center}.d-label{font-size:12px;color:var(--muted);margin-bottom:6px}.d-value{font-size:26px;font-weight:bold;color:var(--primary)}.input-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.input-row input,.input-row select{flex:1;min-width:120px}.action-btn{padding:10px 18px;color:#fff}.btn-blue{background:var(--primary)}.btn-amber{background:var(--amber)}.btn-teal{background:var(--teal)}.btn-gray{background:#a0aec0}.btn-red{background:var(--danger)}.btn-green{background:#38a169}.btn-sm{padding:5px 10px;font-size:12px}.bill-row{background:#ebf8ff;padding:14px;border-radius:8px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:12px 0}.bill-input{display:flex;align-items:center;gap:6px;font-weight:bold;font-size:14px}.bill-input input{width:72px;text-align:right}.calc-display{font-weight:bold;color:var(--primary);font-size:15px}.radio-group{display:flex;gap:10px;flex-wrap:wrap}.radio-group label{padding:8px 14px;border-radius:6px;background:#edf2f7;cursor:pointer;font-size:13px;font-weight:bold}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:var(--box);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}th,td{padding:11px 14px;text-align:center;border-bottom:1px solid var(--border);font-size:13px}th{background:#edf2f7}.td-left{text-align:left}.text-income,.text-in{color:var(--teal);font-weight:bold}.text-expense{color:var(--danger);font-weight:bold}.text-out{color:var(--amber);font-weight:bold}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:16px}.product-card{background:#fffaf0;border:1px solid #feebc8;border-radius:8px;padding:14px;text-align:center;position:relative}.p-del{position:absolute;top:4px;right:4px;background:#fc8181;color:#fff;width:18px;height:18px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center}.p-name{font-weight:bold;font-size:15px;margin:4px 0}.p-price{font-size:13px;color:var(--muted);margin-bottom:4px}.p-stock{font-size:11px;color:var(--muted);margin-bottom:8px}.qty-ctrl{display:flex;justify-content:center;align-items:center;gap:8px}.qty-btn{background:#e2e8f0;width:28px;height:28px;border-radius:50%;font-size:16px}.qty-in{width:48px;text-align:center;padding:4px}.pay-bar{background:#feebc8;border-radius:8px;padding:14px;text-align:center;font-size:18px;font-weight:bold;margin-bottom:16px}.pay-bar span{color:#c05621;font-size:22px}.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:20px}.inv-card{background:var(--box);border-radius:var(--radius);padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center;border-top:4px solid var(--amber)}.inv-card h3{font-size:13px;color:var(--muted);margin-bottom:8px}.inv-count{font-size:22px;font-weight:bold}.inv-del{background:none;color:var(--danger);font-size:12px;padding:0;margin-left:4px}.data-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-bottom:12px}.teacher-only{display:none}.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center}.modal-bg.open{display:flex}.modal-box{background:var(--box);border-radius:14px;padding:28px;width:90%;max-width:620px;max-height:80vh;overflow-y:auto}.modal-close{float:right;font-size:24px;color:var(--muted);background:none}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}@media(max-width:600px){.stats-grid{grid-template-columns:1fr}.app-logo{display:none}}.stats-box{background:#fffaf0;border:1px solid #feebc8;border-radius:8px;padding:14px}.stats-box h3{font-size:14px;color:#c05621;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #feebc8}.stats-ul{list-style:none}.stats-ul li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--border);font-size:13px}.small-note{font-size:12px;color:var(--muted);margin-top:8px}.danger-note{font-size:12px;color:#9b2c2c;margin-top:8px}
 
@@ -28,7 +28,7 @@
     <div class="login-error" id="loginError"></div>
     <div class="login-hint">
       Firebase Auth 보안 로그인 사용<br>
-      <span style="font-size:11px;color:#718096">버전: 2026-06-12-auth-safe-v1</span>
+      <span style="font-size:11px;color:#718096">버전: 2026-06-12-auth-safe-v2-seed-month</span>
     </div>
   </div>
 </div>
@@ -186,7 +186,9 @@ function initFirebase(){
         document.getElementById("loginScreen").style.display="none";
         document.getElementById("appScreen").style.display="block";
         applyRoleVisibility();
+        if(role==='teacher'||role==='operator') seedDefaults();
         listenAll();
+        fillInspectionMonthSelects();
         const firstTab=role==="teacher"?"admin":(role==="operator"?"vault":role);
         const firstBtn=document.getElementById(role==="teacher"?"btnAdmin":(role==="operator"?"btnVault":"btn"+cap(role)));
         switchTab(firstTab,firstBtn);
@@ -199,7 +201,6 @@ function initFirebase(){
     });
 
     db.ref('.info/connected').on('value',s=>setNet(s.val()?'online':'offline',s.val()?'온라인':'오프라인'));
-    seedDefaults();
   }catch(e){
     setNet('offline','설정 오류');
     document.getElementById('loginError').textContent='Firebase 설정 오류: '+e.message;
@@ -214,12 +215,32 @@ function getRoleByEmail(email){
 }
 async function seedDefaults(){
   if(!db)return;
-  const rootSnap=await db.ref().get();
-  const data=rootSnap.val()||{};
-  const updates={};
-  if(!data.products)DEFAULT_PRODUCTS.forEach((p,i)=>updates['products/p'+i]={...p,active:true,createdAt:Date.now()+i});
-  if(!data.stockItems)DEFAULT_STOCK_ITEMS.forEach((name,i)=>updates['stockItems/s'+i]={name,active:true,createdAt:Date.now()+i});
-  if(Object.keys(updates).length)await db.ref().update(updates);
+  if(!(role==='teacher'||role==='operator'))return;
+  try{
+    const updates={};
+
+    const productsSnap=await db.ref('products').get();
+    const productsData=productsSnap.val();
+    if(!productsData || Object.keys(productsData).length===0){
+      DEFAULT_PRODUCTS.forEach((p,i)=>{
+        updates['products/p'+i]={...p,active:true,createdAt:Date.now()+i};
+      });
+    }
+
+    const stockItemsSnap=await db.ref('stockItems').get();
+    const stockItemsData=stockItemsSnap.val();
+    if(!stockItemsData || Object.keys(stockItemsData).length===0){
+      DEFAULT_STOCK_ITEMS.forEach((name,i)=>{
+        updates['stockItems/s'+i]={name,active:true,createdAt:Date.now()+i};
+      });
+    }
+
+    if(Object.keys(updates).length)await db.ref().update(updates);
+  }catch(e){
+    console.error('seedDefaults failed',e);
+    const msg=document.getElementById('loginError');
+    if(msg)msg.textContent='기본 물건 불러오기 실패: Firebase Rules 또는 로그인 권한을 확인하세요.';
+  }
 }
 let listenersStarted=false;
 function listenAll(){
@@ -318,6 +339,16 @@ function calcVaultTotal(){const b1000=n('bill1000'),b500=n('bill500'),b100=n('bi
 function addVault(){if(!canWriteArea('operation'))return deny();const b1000=n('bill1000'),b500=n('bill500'),b100=n('bill100'),amount=b1000*1000+b500*500+b100*100,student=document.getElementById('vaultStudent').value,desc=document.getElementById('vaultDesc').value.trim(),type=document.querySelector('input[name="vaultType"]:checked').value,date=document.getElementById('vaultDate').value||today();if(!desc){alert('내용을 입력해주세요.');return}if(!amount){alert('지폐 장수를 입력해주세요.');return}const id=newId(),entry={id,date,student,desc,type,b1000,b500,b100,amount,createdAt:Date.now()};vaultLogs.push(entry);renderVault();db.ref('vaultLogs/'+id).set(entry);document.getElementById('vaultMsg').textContent='저장 완료';setTimeout(()=>document.getElementById('vaultMsg').textContent='',1200);document.getElementById('vaultDesc').value='';document.getElementById('vaultStudent').value='';['bill1000','bill500','bill100'].forEach(id=>document.getElementById(id).value='');document.getElementById('vaultCalc').textContent='0'}
 function deleteVault(id){if(!confirm('이 금고 기록을 삭제할까요?'))return;vaultLogs=vaultLogs.filter(x=>x.id!==id);renderVault();db.ref('vaultLogs/'+id).remove()}
 function renderVault(){let total=0,t1000=0,t500=0,t100=0;const tbody=document.getElementById('vaultTableBody');tbody.innerHTML='';[...vaultLogs].sort((a,b)=>sortByDateThenCreated(a,b,'date',false)).forEach(e=>{if(e.type==='income'){total+=e.amount;t1000+=e.b1000;t500+=e.b500;t100+=e.b100}else{total-=e.amount;t1000-=e.b1000;t500-=e.b500;t100-=e.b100}const bills=[];if(e.b1000)bills.push('1천×'+e.b1000);if(e.b500)bills.push('5백×'+e.b500);if(e.b100)bills.push('1백×'+e.b100);tbody.innerHTML+=`<tr><td>${escapeHtml(e.date)}</td><td>${escapeHtml(e.student||'')}</td><td class="td-left">${escapeHtml(e.desc)}</td><td style="font-size:12px;color:var(--muted)">${escapeHtml(bills.join(', '))}</td><td class="text-income">${e.type==='income'? '+'+Number(e.amount).toLocaleString():''}</td><td class="text-expense">${e.type==='expense'? '-'+Number(e.amount).toLocaleString():''}</td><td><button class="action-btn btn-gray btn-sm" onclick="deleteVault('${e.id}')">삭제</button></td></tr>`});document.getElementById('vaultTotal').textContent=total.toLocaleString()+' 오구';document.getElementById('cnt1000').textContent=t1000+'장';document.getElementById('cnt500').textContent=t500+'장';document.getElementById('cnt100').textContent=t100+'장'}
+
+async function restoreDefaultProducts(){
+  if(!canWriteArea('operation'))return deny();
+  if(!confirm('기본 마트 상품과 재고 품목을 다시 넣을까요? 이미 있는 상품은 그대로 두고, 기본값을 다시 저장합니다.'))return;
+  const updates={};
+  DEFAULT_PRODUCTS.forEach((p,i)=>updates['products/p'+i]={...p,active:true,createdAt:Date.now()+i});
+  DEFAULT_STOCK_ITEMS.forEach((name,i)=>updates['stockItems/s'+i]={name,active:true,createdAt:Date.now()+i});
+  await db.ref().update(updates);
+  alert('기본 상품과 재고 품목을 복구했습니다.');
+}
 function renderProducts(){const grid=document.getElementById('productGrid');grid.innerHTML='';products.forEach(p=>{quantities[p.id]=quantities[p.id]||0;grid.innerHTML+=`<div class="product-card"><button class="p-del" onclick="deleteProduct('${p.id}')">×</button><div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${Number(p.price).toLocaleString()} 오구</div><div class="p-stock">재고: ${escapeHtml(p.stockItem||p.name)}</div><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button><input type="number" id="qty_${p.id}" class="qty-in" value="${quantities[p.id]}" min="0" oninput="manualQty('${p.id}')"><button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button></div></div>`});calcMart()}
 function addProduct(){if(!canWriteArea('operation'))return deny();const name=document.getElementById('newProductName').value.trim(),price=parseInt(document.getElementById('newProductPrice').value),stockItem=document.getElementById('newProductStockItem').value.trim()||name;if(!name){alert('상품명을 입력해주세요.');return}if(isNaN(price)||price<0){alert('올바른 가격을 입력해주세요.');return}const id=newId(),p={id,name,price,stockItem,active:true,createdAt:Date.now()};products.push(p);renderProducts();db.ref('products/'+id).set(p);db.ref('stockItems/'+safeKey(stockItem)).set({name:stockItem,active:true});document.getElementById('newProductName').value='';document.getElementById('newProductPrice').value='';document.getElementById('newProductStockItem').value=''}
 function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p)return;if(!confirm("'"+p.name+"' 상품을 숨길까요?"))return;products=products.filter(x=>x.id!==id);renderProducts();db.ref('products/'+id+'/active').set(false)}
