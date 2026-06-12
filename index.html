@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>오구 운영센터</title>
-<!-- 2026-06-12-auth-safe-v2-seed-month -->
+<!-- 2026-06-12-auth-safe-v4-products-readfix -->
 <style>
 :root{--primary:#2b6cb0;--amber:#ed8936;--teal:#38a169;--purple:#805ad5;--danger:#e53e3e;--bg:#f0f4f8;--box:#fff;--text:#2d3748;--muted:#718096;--border:#e2e8f0;--radius:10px}*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}button{cursor:pointer;font-family:inherit;border:none;border-radius:6px;font-weight:bold}button:hover{opacity:.86}input,select{font-family:inherit;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--text)}input:focus,select:focus{outline:2px solid var(--primary);outline-offset:1px}#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#ebf8ff 0%,#fffaf0 100%)}.login-box{background:var(--box);border-radius:16px;padding:46px 38px;box-shadow:0 8px 32px rgba(0,0,0,.12);width:360px;text-align:center}.login-logo{font-size:48px;margin-bottom:8px}.login-title{font-size:24px;font-weight:bold;color:var(--primary);margin-bottom:4px}.login-sub{font-size:13px;color:var(--muted);margin-bottom:24px}.login-box input{width:100%;margin-bottom:12px;text-align:center;letter-spacing:3px}.login-btn{width:100%;padding:12px;font-size:16px;background:var(--primary);color:#fff}.login-error{color:var(--danger);font-size:13px;margin-top:8px;min-height:18px}.login-hint{font-size:12px;color:var(--muted);margin-top:14px}#appScreen{display:none;min-height:100vh}.app-header{background:var(--box);padding:0 18px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;position:sticky;top:0;z-index:100}.app-logo{font-size:15px;font-weight:bold;color:var(--primary);padding:16px 16px 16px 0;white-space:nowrap;border-right:1px solid var(--border);margin-right:8px}.tab-nav{display:flex;flex:1;overflow-x:auto}.tab-btn{padding:16px 18px;font-size:14px;color:var(--muted);background:none;border-bottom:3px solid transparent;border-radius:0;white-space:nowrap}.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}.logout-btn{padding:8px 14px;background:#edf2f7;color:var(--text);font-size:12px;margin-left:8px;white-space:nowrap}.status{font-size:11px;padding:4px 9px;border-radius:99px;margin-left:8px;white-space:nowrap;font-weight:bold}.online{background:#c6f6d5;color:#276749}.offline{background:#fed7d7;color:#9b2c2c}.syncing{background:#bee3f8;color:#2a69ac}.tab-content{display:none;padding:24px;max-width:980px;margin:0 auto}.tab-content.active{display:block}.section,.card{background:var(--box);border-radius:var(--radius);padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:20px}.section h2{font-size:15px;color:var(--muted);margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}.dash-card{background:var(--box);border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center}.d-label{font-size:12px;color:var(--muted);margin-bottom:6px}.d-value{font-size:26px;font-weight:bold;color:var(--primary)}.input-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.input-row input,.input-row select{flex:1;min-width:120px}.action-btn{padding:10px 18px;color:#fff}.btn-blue{background:var(--primary)}.btn-amber{background:var(--amber)}.btn-teal{background:var(--teal)}.btn-gray{background:#a0aec0}.btn-red{background:var(--danger)}.btn-green{background:#38a169}.btn-sm{padding:5px 10px;font-size:12px}.bill-row{background:#ebf8ff;padding:14px;border-radius:8px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:12px 0}.bill-input{display:flex;align-items:center;gap:6px;font-weight:bold;font-size:14px}.bill-input input{width:72px;text-align:right}.calc-display{font-weight:bold;color:var(--primary);font-size:15px}.radio-group{display:flex;gap:10px;flex-wrap:wrap}.radio-group label{padding:8px 14px;border-radius:6px;background:#edf2f7;cursor:pointer;font-size:13px;font-weight:bold}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:var(--box);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}th,td{padding:11px 14px;text-align:center;border-bottom:1px solid var(--border);font-size:13px}th{background:#edf2f7}.td-left{text-align:left}.text-income,.text-in{color:var(--teal);font-weight:bold}.text-expense{color:var(--danger);font-weight:bold}.text-out{color:var(--amber);font-weight:bold}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:16px}.product-card{background:#fffaf0;border:1px solid #feebc8;border-radius:8px;padding:14px;text-align:center;position:relative}.p-del{position:absolute;top:4px;right:4px;background:#fc8181;color:#fff;width:18px;height:18px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center}.p-name{font-weight:bold;font-size:15px;margin:4px 0}.p-price{font-size:13px;color:var(--muted);margin-bottom:4px}.p-stock{font-size:11px;color:var(--muted);margin-bottom:8px}.qty-ctrl{display:flex;justify-content:center;align-items:center;gap:8px}.qty-btn{background:#e2e8f0;width:28px;height:28px;border-radius:50%;font-size:16px}.qty-in{width:48px;text-align:center;padding:4px}.pay-bar{background:#feebc8;border-radius:8px;padding:14px;text-align:center;font-size:18px;font-weight:bold;margin-bottom:16px}.pay-bar span{color:#c05621;font-size:22px}.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:20px}.inv-card{background:var(--box);border-radius:var(--radius);padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center;border-top:4px solid var(--amber)}.inv-card h3{font-size:13px;color:var(--muted);margin-bottom:8px}.inv-count{font-size:22px;font-weight:bold}.inv-del{background:none;color:var(--danger);font-size:12px;padding:0;margin-left:4px}.data-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-bottom:12px}.teacher-only{display:none}.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center}.modal-bg.open{display:flex}.modal-box{background:var(--box);border-radius:14px;padding:28px;width:90%;max-width:620px;max-height:80vh;overflow-y:auto}.modal-close{float:right;font-size:24px;color:var(--muted);background:none}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}@media(max-width:600px){.stats-grid{grid-template-columns:1fr}.app-logo{display:none}}.stats-box{background:#fffaf0;border:1px solid #feebc8;border-radius:8px;padding:14px}.stats-box h3{font-size:14px;color:#c05621;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #feebc8}.stats-ul{list-style:none}.stats-ul li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--border);font-size:13px}.small-note{font-size:12px;color:var(--muted);margin-top:8px}.danger-note{font-size:12px;color:#9b2c2c;margin-top:8px}
 
@@ -28,14 +28,14 @@
     <div class="login-error" id="loginError"></div>
     <div class="login-hint">
       Firebase Auth 보안 로그인 사용<br>
-      <span style="font-size:11px;color:#718096">버전: 2026-06-12-auth-safe-v2-seed-month</span>
+      <span style="font-size:11px;color:#718096">버전: 2026-06-12-auth-safe-v4-products-readfix</span>
     </div>
   </div>
 </div>
 <div id="appScreen"><div class="app-header"><div class="app-logo">🏫 오구 운영센터</div><div class="tab-nav"><button class="tab-btn active" id="btnVault" onclick="switchTab('vault',this)">💰 금고</button><button class="tab-btn" id="btnMart" onclick="switchTab('mart',this)">🛒 마트</button><button class="tab-btn" id="btnStock" onclick="switchTab('stock',this)">📦 재고</button><button class="tab-btn inspect-tab" id="btnTooth" onclick="switchTab('tooth',this)">🪥 양치</button><button class="tab-btn inspect-tab" id="btnMilk" onclick="switchTab('milk',this)">🥛 우유</button><button class="tab-btn inspect-tab" id="btnLunch" onclick="switchTab('lunch',this)">🍱 급식</button><button class="tab-btn teacher-only" id="btnAdmin" onclick="switchTab('admin',this)">⚙️ 관리</button></div><span class="status syncing" id="netStatus">연결 중</span><span class="status" id="roleStatus" style="background:#edf2f7;color:#2d3748">미로그인</span><button class="logout-btn" onclick="logout()">로그아웃</button></div>
 <div id="tab-vault" class="tab-content active"><div class="grid"><div class="dash-card"><div class="d-label">현재 금고 총 잔액</div><div class="d-value" id="vaultTotal">0 오구</div></div><div class="dash-card"><div class="d-label">1,000오구</div><div class="d-value" style="font-size:20px" id="cnt1000">0장</div></div><div class="dash-card"><div class="d-label">500오구</div><div class="d-value" style="font-size:20px" id="cnt500">0장</div></div><div class="dash-card"><div class="d-label">100오구</div><div class="d-value" style="font-size:20px" id="cnt100">0장</div></div></div><div class="section"><h2>💰 금고 기록</h2><div class="input-row" style="margin-bottom:12px"><input type="date" id="vaultDate"><select id="vaultStudent"></select><select id="vaultReason"></select><input type="text" id="vaultDesc" placeholder="기타일 때만 직접 입력" style="flex:2"><div class="radio-group"><label><input type="radio" name="vaultType" value="income" checked onchange="updateVaultReasonOptions()"> 📥 수입</label><label><input type="radio" name="vaultType" value="expense" onchange="updateVaultReasonOptions()"> 📤 지출</label></div></div><div class="bill-row"><div class="bill-input">1,000오구 <input type="number" id="bill1000" min="0" placeholder="0"> 장</div><div class="bill-input">500오구 <input type="number" id="bill500" min="0" placeholder="0"> 장</div><div class="bill-input">100오구 <input type="number" id="bill100" min="0" placeholder="0"> 장</div><div class="calc-display">합계: <span id="vaultCalc">0</span> 오구</div></div><button class="action-btn btn-blue" onclick="addVault()">금고에 기록하기</button><span class="small-note" id="vaultMsg"></span></div><div class="section" id="paymentRequestSection"><h2>📨 검사 지급 요청함</h2><div id="paymentRequestList"><div class="small-note">미처리 지급 요청이 없습니다.</div></div></div><div class="data-bar"><button class="action-btn btn-gray btn-sm" onclick="document.getElementById('vaultImportFile').click()">불러오기(CSV/JSON)</button><input type="file" id="vaultImportFile" accept=".csv,.json" style="display:none" onchange="importVaultFile(event)"><button class="action-btn btn-green btn-sm" onclick="exportVaultCSV()">엑셀 저장</button><button class="action-btn btn-blue btn-sm" onclick="downloadJSON('오구금고_백업', vaultLogs)">백업(JSON)</button><button class="action-btn btn-red btn-sm teacher-only" onclick="resetPath('vaultLogs','금고 장부')">전체 초기화</button></div><div class="table-wrap"><table><thead><tr><th>날짜</th><th>학생</th><th>내용</th><th>지폐내역</th><th>수입(+)</th><th>지출(-)</th><th>관리</th></tr></thead><tbody id="vaultTableBody"></tbody></table></div></div>
-<div id="tab-mart" class="tab-content"><div class="grid"><div class="dash-card"><div class="d-label">총 판매 수익</div><div class="d-value" style="color:var(--amber)" id="martTotal">0 오구</div></div></div><div class="section"><h2>🛒 마트 판매</h2><div class="input-row" style="margin-bottom:12px"><label style="font-weight:bold">손님 선택:</label><select id="studentSelect" style="flex:1"></select></div><div style="background:#edf2f7;padding:12px;border-radius:8px;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-weight:bold;font-size:13px">➕ 상품 추가:</span><input type="text" id="newProductName" placeholder="상품명" style="flex:1;min-width:100px"><input type="number" id="newProductPrice" placeholder="가격" style="width:90px"><input type="text" id="newProductStockItem" placeholder="재고품목명" style="flex:1;min-width:120px"><button class="action-btn btn-gray btn-sm" onclick="addProduct()">추가</button></div><div class="product-grid" id="productGrid"></div><div class="pay-bar">결제할 금액: <span id="currentTotal">0</span> 오구</div><button class="action-btn btn-amber" style="width:100%;padding:14px;font-size:16px" onclick="processSale()">결제 완료 및 장부 기록</button><div class="small-note">결제하면 판매 장부 저장 + 재고 자동 차감이 거의 즉시 반영됩니다.</div></div><div class="data-bar"><button class="action-btn btn-gray btn-sm" onclick="document.getElementById('martImportFile').click()">불러오기(CSV)</button><input type="file" id="martImportFile" accept=".csv" style="display:none" onchange="importMartFile(event)"><button class="action-btn btn-amber btn-sm" onclick="openStatsModal()">통계</button><button class="action-btn btn-green btn-sm" onclick="exportMartCSV()">CSV 저장</button><button class="action-btn btn-red btn-sm teacher-only" onclick="resetPath('sales','마트 판매 장부')">전체 초기화</button></div><div class="table-wrap"><table><thead><tr><th>시간</th><th>학생</th><th>구매 내역</th><th>금액</th><th>취소</th></tr></thead><tbody id="martTableBody"></tbody></table></div></div>
-<div id="tab-stock" class="tab-content"><div class="inv-grid" id="inventoryGrid"></div><div class="section"><h2>📦 재고 기록</h2><div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap"><input type="text" id="newItemInput" placeholder="새 품목 이름" style="flex:1"><button class="action-btn btn-teal btn-sm" onclick="addStockItem()">품목 추가</button></div><div class="input-row"><select id="stockItemSelect"></select><div class="radio-group"><label><input type="radio" name="stockType" value="in" checked> 입고(+)</label><label><input type="radio" name="stockType" value="out"> 판매(-)</label></div><input type="number" id="stockQty" placeholder="수량" min="1" style="width:80px"><input type="date" id="stockDate"><button class="action-btn btn-teal" onclick="addStockLog()">기록하기</button></div></div><div class="data-bar"><button class="action-btn btn-gray btn-sm" onclick="document.getElementById('stockImportFile').click()">불러오기(CSV/JSON)</button><input type="file" id="stockImportFile" accept=".csv,.json" style="display:none" onchange="importStockFile(event)"><button class="action-btn btn-green btn-sm" onclick="exportStockCSV()">엑셀 저장</button><button class="action-btn btn-blue btn-sm" onclick="downloadJSON('오구재고_백업',{items:stockItems,logs:stockLogs})">백업(JSON)</button><button class="action-btn btn-red btn-sm teacher-only" onclick="resetStockAll()">전체 초기화</button></div><div class="table-wrap"><table><thead><tr><th>날짜</th><th>품목</th><th>구분</th><th>수량</th><th>관리</th></tr></thead><tbody id="stockTableBody"></tbody></table></div></div>
+<div id="tab-mart" class="tab-content"><div class="grid"><div class="dash-card"><div class="d-label">총 판매 수익</div><div class="d-value" style="color:var(--amber)" id="martTotal">0 오구</div></div></div><div class="section"><h2>🛒 마트 판매</h2><div class="input-row" style="margin-bottom:12px"><label style="font-weight:bold">손님 선택:</label><select id="studentSelect" style="flex:1"></select></div><div style="background:#edf2f7;padding:12px;border-radius:8px;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-weight:bold;font-size:13px">➕ 상품 추가:</span><input type="text" id="newProductName" placeholder="상품명" style="flex:1;min-width:100px"><input type="number" id="newProductPrice" placeholder="가격" style="width:90px"><input type="text" id="newProductStockItem" placeholder="재고품목명" style="flex:1;min-width:120px"><button class="action-btn btn-gray btn-sm" onclick="addProduct()">추가</button><button class="action-btn btn-teal btn-sm" onclick="restoreDefaultProducts()">기본 상품 복구</button></div><div class="product-grid" id="productGrid"></div><div class="pay-bar">결제할 금액: <span id="currentTotal">0</span> 오구</div><button class="action-btn btn-amber" style="width:100%;padding:14px;font-size:16px" onclick="processSale()">결제 완료 및 장부 기록</button><div class="small-note">결제하면 판매 장부 저장 + 재고 자동 차감이 거의 즉시 반영됩니다.</div></div><div class="data-bar"><button class="action-btn btn-gray btn-sm" onclick="document.getElementById('martImportFile').click()">불러오기(CSV)</button><input type="file" id="martImportFile" accept=".csv" style="display:none" onchange="importMartFile(event)"><button class="action-btn btn-amber btn-sm" onclick="openStatsModal()">통계</button><button class="action-btn btn-green btn-sm" onclick="exportMartCSV()">CSV 저장</button><button class="action-btn btn-red btn-sm teacher-only" onclick="resetPath('sales','마트 판매 장부')">전체 초기화</button></div><div class="table-wrap"><table><thead><tr><th>시간</th><th>학생</th><th>구매 내역</th><th>금액</th><th>취소</th></tr></thead><tbody id="martTableBody"></tbody></table></div></div>
+<div id="tab-stock" class="tab-content"><div class="inv-grid" id="inventoryGrid"></div><div class="section"><h2>📦 재고 기록</h2><div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap"><input type="text" id="newItemInput" placeholder="새 품목 이름" style="flex:1"><button class="action-btn btn-teal btn-sm" onclick="addStockItem()">품목 추가</button><button class="action-btn btn-blue btn-sm" onclick="restoreDefaultProducts()">기본 재고품목 복구</button></div><div class="input-row"><select id="stockItemSelect"></select><div class="radio-group"><label><input type="radio" name="stockType" value="in" checked> 입고(+)</label><label><input type="radio" name="stockType" value="out"> 판매(-)</label></div><input type="number" id="stockQty" placeholder="수량" min="1" style="width:80px"><input type="date" id="stockDate"><button class="action-btn btn-teal" onclick="addStockLog()">기록하기</button></div></div><div class="data-bar"><button class="action-btn btn-gray btn-sm" onclick="document.getElementById('stockImportFile').click()">불러오기(CSV/JSON)</button><input type="file" id="stockImportFile" accept=".csv,.json" style="display:none" onchange="importStockFile(event)"><button class="action-btn btn-green btn-sm" onclick="exportStockCSV()">엑셀 저장</button><button class="action-btn btn-blue btn-sm" onclick="downloadJSON('오구재고_백업',{items:stockItems,logs:stockLogs})">백업(JSON)</button><button class="action-btn btn-red btn-sm teacher-only" onclick="resetStockAll()">전체 초기화</button></div><div class="table-wrap"><table><thead><tr><th>날짜</th><th>품목</th><th>구분</th><th>수량</th><th>관리</th></tr></thead><tbody id="stockTableBody"></tbody></table></div></div>
 
 <div id="tab-tooth" class="tab-content inspection-screen">
   <div class="section">
@@ -217,40 +217,87 @@ async function seedDefaults(){
   if(!db)return;
   if(!(role==='teacher'||role==='operator'))return;
   try{
-    const updates={};
-
     const productsSnap=await db.ref('products').get();
     const productsData=productsSnap.val();
     if(!productsData || Object.keys(productsData).length===0){
-      DEFAULT_PRODUCTS.forEach((p,i)=>{
-        updates['products/p'+i]={...p,active:true,createdAt:Date.now()+i};
-      });
+      for(let i=0;i<DEFAULT_PRODUCTS.length;i++){
+        await db.ref('products/p'+i).set({...DEFAULT_PRODUCTS[i],active:true,createdAt:Date.now()+i});
+      }
     }
 
     const stockItemsSnap=await db.ref('stockItems').get();
     const stockItemsData=stockItemsSnap.val();
     if(!stockItemsData || Object.keys(stockItemsData).length===0){
-      DEFAULT_STOCK_ITEMS.forEach((name,i)=>{
-        updates['stockItems/s'+i]={name,active:true,createdAt:Date.now()+i};
-      });
+      for(let i=0;i<DEFAULT_STOCK_ITEMS.length;i++){
+        await db.ref('stockItems/s'+i).set({name:DEFAULT_STOCK_ITEMS[i],active:true,createdAt:Date.now()+i});
+      }
     }
-
-    if(Object.keys(updates).length)await db.ref().update(updates);
   }catch(e){
     console.error('seedDefaults failed',e);
-    const msg=document.getElementById('loginError');
-    if(msg)msg.textContent='기본 물건 불러오기 실패: Firebase Rules 또는 로그인 권한을 확인하세요.';
+    alert('기본 마트/재고 품목을 Firebase에 저장하지 못했습니다. Realtime Database Rules가 최신인지 확인하세요. 화면에는 임시 기본 품목을 보여줍니다.');
   }
 }
 let listenersStarted=false;
+
+function normalizeProductsFromDb(raw){
+  if(!raw)return [];
+  let arr=[];
+  if(Array.isArray(raw)){
+    arr=raw.map((v,i)=>v?{id:String(i),...v}:null).filter(Boolean);
+  }else{
+    arr=Object.entries(raw).map(([id,v])=>{
+      if(!v)return null;
+      if(typeof v==='string')return {id,name:v,price:0,stockItem:v,active:true};
+      return {id,...v};
+    }).filter(Boolean);
+  }
+  return arr
+    .map(p=>({
+      id:String(p.id||safeKey(p.name||('상품'+Date.now()))),
+      name:String(p.name||p.productName||p.title||'이름 없는 상품'),
+      price:Number(p.price||p.amount||0),
+      stockItem:String(p.stockItem||p.item||p.name||''),
+      active:p.active===false||p.active==='false'?false:true,
+      createdAt:Number(p.createdAt||0)
+    }))
+    .filter(p=>p.active!==false)
+    .sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+}
+function normalizeStockItemsFromDb(raw){
+  if(!raw)return [];
+  let arr=[];
+  if(Array.isArray(raw)){
+    arr=raw.map((v,i)=>{
+      if(!v)return null;
+      if(typeof v==='string')return {id:String(i),name:v,active:true};
+      return {id:String(i),...v};
+    }).filter(Boolean);
+  }else{
+    arr=Object.entries(raw).map(([id,v])=>{
+      if(!v)return null;
+      if(typeof v==='string')return {id,name:v,active:true};
+      return {id,...v};
+    }).filter(Boolean);
+  }
+  return arr
+    .map(i=>({
+      id:String(i.id||safeKey(i.name||'')),
+      name:String(i.name||i.item||i.title||''),
+      active:i.active===false||i.active==='false'?false:true,
+      createdAt:Number(i.createdAt||0)
+    }))
+    .filter(i=>i.active!==false&&i.name)
+    .sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))
+    .map(i=>i.name);
+}
 function listenAll(){
   if(!db||listenersStarted)return;
   listenersStarted=true;
   db.ref('vaultLogs').on('value',s=>{vaultLogs=objToArray(s.val());renderVault();renderPaymentRequests()});
   db.ref('sales').on('value',s=>{salesData=objToArray(s.val());renderMart()});
   db.ref('stockLogs').on('value',s=>{stockLogs=objToArray(s.val());renderStock()});
-  db.ref('products').on('value',s=>{products=objToArray(s.val()).filter(p=>p.active!==false);renderProducts();renderAdminProducts()});
-  db.ref('stockItems').on('value',s=>{stockItems=objToArray(s.val()).filter(i=>i.active!==false).map(i=>i.name).sort();renderStock()});
+  db.ref('products').on('value',s=>{products=normalizeProductsFromDb(s.val());renderProducts();renderAdminProducts()});
+  db.ref('stockItems').on('value',s=>{stockItems=normalizeStockItemsFromDb(s.val());renderStock()});
   db.ref('inspectionRecords').on('value',s=>{inspectionRecords=s.val()||{};['tooth','milk','lunch'].forEach(t=>renderInspection(t))});
   db.ref('paymentRequests').on('value',s=>{paymentRequests=objToArray(s.val());renderPaymentRequests()});
 }
@@ -342,23 +389,80 @@ function renderVault(){let total=0,t1000=0,t500=0,t100=0;const tbody=document.ge
 
 async function restoreDefaultProducts(){
   if(!canWriteArea('operation'))return deny();
-  if(!confirm('기본 마트 상품과 재고 품목을 다시 넣을까요? 이미 있는 상품은 그대로 두고, 기본값을 다시 저장합니다.'))return;
-  const updates={};
-  DEFAULT_PRODUCTS.forEach((p,i)=>updates['products/p'+i]={...p,active:true,createdAt:Date.now()+i});
-  DEFAULT_STOCK_ITEMS.forEach((name,i)=>updates['stockItems/s'+i]={name,active:true,createdAt:Date.now()+i});
-  await db.ref().update(updates);
-  alert('기본 상품과 재고 품목을 복구했습니다.');
+  if(!confirm('기본 마트 상품과 재고 품목을 다시 넣을까요?'))return;
+  try{
+    for(let i=0;i<DEFAULT_PRODUCTS.length;i++){
+      await db.ref('products/p'+i).set({...DEFAULT_PRODUCTS[i],active:true,createdAt:Date.now()+i});
+    }
+    for(let i=0;i<DEFAULT_STOCK_ITEMS.length;i++){
+      await db.ref('stockItems/s'+i).set({name:DEFAULT_STOCK_ITEMS[i],active:true,createdAt:Date.now()+i});
+    }
+    alert('기본 상품과 재고 품목을 복구했습니다.');
+  }catch(e){
+    alert('복구 실패: Firebase Rules에서 운영 계정의 쓰기 권한을 확인하세요. '+e.message);
+    console.error(e);
+  }
 }
-function renderProducts(){const grid=document.getElementById('productGrid');grid.innerHTML='';products.forEach(p=>{quantities[p.id]=quantities[p.id]||0;grid.innerHTML+=`<div class="product-card"><button class="p-del" onclick="deleteProduct('${p.id}')">×</button><div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${Number(p.price).toLocaleString()} 오구</div><div class="p-stock">재고: ${escapeHtml(p.stockItem||p.name)}</div><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button><input type="number" id="qty_${p.id}" class="qty-in" value="${quantities[p.id]}" min="0" oninput="manualQty('${p.id}')"><button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button></div></div>`});calcMart()}
+
+function effectiveProducts(){
+  return (products&&products.length)?products:DEFAULT_PRODUCTS.map((p,i)=>({id:'default_p'+i,...p,active:true,isDefault:true}));
+}
+function effectiveStockItems(){
+  return (stockItems&&stockItems.length)?stockItems:[...DEFAULT_STOCK_ITEMS];
+}
+function renderProducts(){
+  const grid=document.getElementById('productGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  const list=effectiveProducts();
+  if(!list.length){
+    grid.innerHTML='<div class="small-note">등록된 상품이 없습니다.</div>';
+    calcMart();
+    return;
+  }
+  list.forEach(p=>{
+    quantities[p.id]=quantities[p.id]||0;
+    grid.innerHTML+=`<div class="product-card"><button class="p-del" onclick="deleteProduct('${p.id}')">×</button><div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${Number(p.price).toLocaleString()} 오구</div><div class="p-stock">재고: ${escapeHtml(p.stockItem||p.name)}</div><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button><input type="number" id="qty_${p.id}" class="qty-in" value="${quantities[p.id]}" min="0" oninput="manualQty('${p.id}')"><button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button></div></div>`;
+  });
+  calcMart();
+}
 function addProduct(){if(!canWriteArea('operation'))return deny();const name=document.getElementById('newProductName').value.trim(),price=parseInt(document.getElementById('newProductPrice').value),stockItem=document.getElementById('newProductStockItem').value.trim()||name;if(!name){alert('상품명을 입력해주세요.');return}if(isNaN(price)||price<0){alert('올바른 가격을 입력해주세요.');return}const id=newId(),p={id,name,price,stockItem,active:true,createdAt:Date.now()};products.push(p);renderProducts();db.ref('products/'+id).set(p);db.ref('stockItems/'+safeKey(stockItem)).set({name:stockItem,active:true});document.getElementById('newProductName').value='';document.getElementById('newProductPrice').value='';document.getElementById('newProductStockItem').value=''}
 function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p)return;if(!confirm("'"+p.name+"' 상품을 숨길까요?"))return;products=products.filter(x=>x.id!==id);renderProducts();db.ref('products/'+id+'/active').set(false)}
 function changeQty(id,delta){quantities[id]=Math.max(0,(quantities[id]||0)+delta);const el=document.getElementById('qty_'+id);if(el)el.value=quantities[id];calcMart()}function manualQty(id){const el=document.getElementById('qty_'+id);let v=parseInt(el.value)||0;if(v<0){v=0;el.value=0}quantities[id]=v;calcMart()}function calcMart(){let total=0;products.forEach(p=>total+=(quantities[p.id]||0)*Number(p.price||0));document.getElementById('currentTotal').textContent=total.toLocaleString();return total}
-function processSale(){const student=document.getElementById('studentSelect').value,total=calcMart();if(!student){alert('구매한 학생을 선택해주세요.');return}if(!total){alert('구매할 물건을 선택해주세요.');return}const selected=[];products.forEach(p=>{const qty=quantities[p.id]||0;if(qty>0)selected.push({...p,qty})});const saleId=newId(),time=nowText(),items=selected.map(p=>`${p.name} ${p.qty}개`).join(', '),sale={id:saleId,time,student,items,total,createdAt:Date.now()};salesData.push(sale);renderMart();const updates={};updates['sales/'+saleId]=sale;selected.forEach(p=>{const logId=newId(),stockItem=p.stockItem||p.name;updates['stockItems/'+safeKey(stockItem)]={name:stockItem,active:true};updates['stockLogs/'+logId]={id:logId,date:today(),item:stockItem,type:'out',qty:p.qty,linkedSaleId:saleId,createdAt:Date.now()}});db.ref().update(updates);document.getElementById('studentSelect').value='';quantities={};renderProducts()}
+function processSale(){const student=document.getElementById('studentSelect').value,total=calcMart();if(!student){alert('구매한 학생을 선택해주세요.');return}if(!total){alert('구매할 물건을 선택해주세요.');return}const selected=[];effectiveProducts().forEach(p=>{const qty=quantities[p.id]||0;if(qty>0)selected.push({...p,qty})});const saleId=newId(),time=nowText(),items=selected.map(p=>`${p.name} ${p.qty}개`).join(', '),sale={id:saleId,time,student,items,total,createdAt:Date.now()};salesData.push(sale);renderMart();const updates={};updates['sales/'+saleId]=sale;selected.forEach(p=>{const logId=newId(),stockItem=p.stockItem||p.name;updates['stockItems/'+safeKey(stockItem)]={name:stockItem,active:true};updates['stockLogs/'+logId]={id:logId,date:today(),item:stockItem,type:'out',qty:p.qty,linkedSaleId:saleId,createdAt:Date.now()}});db.ref().update(updates);document.getElementById('studentSelect').value='';quantities={};renderProducts()}
 function deleteSale(id){if(!confirm('이 판매 기록을 취소할까요? 연결된 자동 재고 차감도 삭제됩니다.'))return;const linked=stockLogs.filter(l=>l.linkedSaleId===id);salesData=salesData.filter(s=>s.id!==id);stockLogs=stockLogs.filter(l=>l.linkedSaleId!==id);renderMart();renderStock();const updates={};updates['sales/'+id]=null;linked.forEach(l=>updates['stockLogs/'+l.id]=null);db.ref().update(updates)}
 function renderMart(){const tbody=document.getElementById('martTableBody');tbody.innerHTML='';let grand=0;[...salesData].sort((a,b)=>sortBySaleTimeThenCreated(a,b,false)).forEach(s=>{grand+=Number(s.total||0);tbody.innerHTML+=`<tr><td>${escapeHtml(s.time)}</td><td style="font-weight:bold">${escapeHtml(s.student)}</td><td class="td-left">${escapeHtml(s.items)}</td><td style="color:var(--amber);font-weight:bold">${Number(s.total||0).toLocaleString()} 오구</td><td><button class="action-btn btn-gray btn-sm" onclick="deleteSale('${s.id}')">취소</button></td></tr>`});document.getElementById('martTotal').textContent=grand.toLocaleString()+' 오구'}
 function addStockItem(){if(!canWriteArea('operation'))return deny();const item=document.getElementById('newItemInput').value.trim();if(!item){alert('품목 이름을 입력해주세요.');return}db.ref('stockItems/'+safeKey(item)).set({name:item,active:true});document.getElementById('newItemInput').value=''}function deleteStockItem(item){if(!confirm("'"+item+"' 품목을 숨길까요? 기존 기록은 남습니다."))return;db.ref('stockItems/'+safeKey(item)+'/active').set(false)}
 function addStockLog(){if(!canWriteArea('operation'))return deny();const item=document.getElementById('stockItemSelect').value,type=document.querySelector('input[name="stockType"]:checked').value,qty=n('stockQty'),date=document.getElementById('stockDate').value||today();if(!item){alert('품목을 선택해주세요.');return}if(!qty){alert('수량을 입력해주세요.');return}const id=newId(),log={id,date,item,type,qty,linkedSaleId:'',createdAt:Date.now()};stockLogs.push(log);renderStock();db.ref('stockLogs/'+id).set(log);document.getElementById('stockQty').value=''}function deleteStockLog(id){if(!confirm('이 재고 기록을 삭제할까요?'))return;stockLogs=stockLogs.filter(x=>x.id!==id);renderStock();db.ref('stockLogs/'+id).remove()}
-function renderStock(){const sel=document.getElementById('stockItemSelect');sel.innerHTML=stockItems.map(item=>`<option>${escapeHtml(item)}</option>`).join('');const stock={};stockItems.forEach(item=>stock[item]=0);stockLogs.forEach(l=>{if(!stock.hasOwnProperty(l.item))stock[l.item]=0;stock[l.item]+=l.type==='in'?Number(l.qty||0):-Number(l.qty||0)});const grid=document.getElementById('inventoryGrid');grid.innerHTML='';stockItems.forEach(item=>{const cnt=stock[item]||0,color=cnt<=3?'var(--danger)':cnt<=10?'var(--amber)':'var(--teal)';grid.innerHTML+=`<div class="inv-card" style="border-top-color:${color}"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">${escapeHtml(item)}</h3><button class="inv-del" onclick="deleteStockItem('${escapeAttr(item)}')">✖</button></div><div class="inv-count" style="color:${color}">${cnt}개</div></div>`});const tbody=document.getElementById('stockTableBody');tbody.innerHTML='';[...stockLogs].sort((a,b)=>sortByDateThenCreated(a,b,'date',false)).forEach(l=>{const linked=l.linkedSaleId?' <span style="font-size:11px;color:var(--muted)">(마트 자동)</span>':'';tbody.innerHTML+=`<tr><td>${escapeHtml(l.date)}</td><td style="font-weight:bold">${escapeHtml(l.item)}${linked}</td><td class="${l.type==='in'?'text-in':'text-out'}">${l.type==='in'?'입고 (+)':'판매 (-)'}</td><td>${Number(l.qty||0)}개</td><td><button class="action-btn btn-gray btn-sm" onclick="deleteStockLog('${l.id}')">삭제</button></td></tr>`})}
+function renderStock(){
+  const items=effectiveStockItems();
+  const sel=document.getElementById('stockItemSelect');
+  if(sel)sel.innerHTML=items.map(item=>`<option>${escapeHtml(item)}</option>`).join('');
+  const stock={};
+  items.forEach(item=>stock[item]=0);
+  stockLogs.forEach(l=>{
+    if(!stock.hasOwnProperty(l.item))stock[l.item]=0;
+    stock[l.item]+=l.type==='in'?Number(l.qty||0):-Number(l.qty||0);
+  });
+  const grid=document.getElementById('inventoryGrid');
+  if(grid){
+    grid.innerHTML='';
+    items.forEach(item=>{
+      const cnt=stock[item]||0,color=cnt<=3?'var(--danger)':cnt<=10?'var(--amber)':'var(--teal)';
+      grid.innerHTML+=`<div class="inv-card" style="border-top-color:${color}"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">${escapeHtml(item)}</h3><button class="inv-del" onclick="deleteStockItem('${escapeAttr(item)}')">✖</button></div><div class="inv-count" style="color:${color}">${cnt}개</div></div>`;
+    });
+  }
+  const tbody=document.getElementById('stockTableBody');
+  if(tbody){
+    tbody.innerHTML='';
+    [...stockLogs].sort((a,b)=>sortByDateThenCreated(a,b,'date',false)).forEach(l=>{
+      const linked=l.linkedSaleId?' <span class="period-badge">마트자동</span>':'';
+      tbody.innerHTML+=`<tr><td>${escapeHtml(l.date)}</td><td style="font-weight:bold">${escapeHtml(l.item)}${linked}</td><td class="${l.type==="in"?"text-in":"text-out"}">${l.type==="in"?"입고 (+)":"판매 (-)"}</td><td>${Number(l.qty||0)}개</td><td><button class="action-btn btn-gray btn-sm" onclick="deleteStockLog('${l.id}')">삭제</button></td></tr>`;
+    });
+  }
+  updateAdminSummary();
+}
+
 function updateAdminSummary(){
   const v=document.getElementById("adminVaultCount");
   const s=document.getElementById("adminSaleCount");
