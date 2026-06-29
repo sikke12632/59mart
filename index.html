@@ -4,63 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>오구 운영센터</title>
+<!-- 2026-06-12-auth-safe-v4-products-readfix -->
 <style>
-:root{--primary:#2563eb;--amber:#d97706;--teal:#059669;--danger:#dc2626;--bg:#f3f4f6;--box:#fff;--text:#1f2937;--muted:#6b7280;--border:#d1d5db}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-button{cursor:pointer;font-family:inherit;border:0;border-radius:6px;font-weight:700}
-button:hover{opacity:.88}
-input,select{font-family:inherit;padding:9px 11px;border:1px solid var(--border);border-radius:6px;font-size:14px}
-#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#dbeafe,#fff7ed)}
-.login-box{background:#fff;border-radius:14px;padding:34px;width:360px;box-shadow:0 12px 30px rgba(0,0,0,.14);text-align:center}
-.login-box h1{font-size:24px;margin-bottom:8px;color:var(--primary)}
-.login-box p{font-size:13px;color:var(--muted);margin-bottom:18px}
-.login-box select,.login-box input,.login-box button{width:100%;margin-top:10px}
-.login-box button{padding:12px;background:var(--primary);color:#fff;font-size:16px}
-.login-error{min-height:20px;color:var(--danger);font-size:13px;margin-top:10px}
-#appScreen{display:none}
-.app-header{position:sticky;top:0;z-index:10;background:#fff;display:flex;align-items:center;gap:8px;padding:0 14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.app-logo{font-weight:800;color:var(--primary);white-space:nowrap}
-.tab-nav{display:flex;flex:1;overflow-x:auto}
-.tab-btn{padding:15px 13px;background:transparent;color:var(--muted);border-bottom:3px solid transparent;border-radius:0;white-space:nowrap}
-.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
-.status{font-size:12px;border-radius:999px;padding:4px 9px;white-space:nowrap;font-weight:700}
-.online{background:#dcfce7;color:#166534}.offline{background:#fee2e2;color:#991b1b}.syncing{background:#dbeafe;color:#1d4ed8}
-.logout-btn{padding:8px 10px;background:#e5e7eb}
-.tab-content{display:none;max-width:1040px;margin:0 auto;padding:22px}
-.tab-content.active{display:block}
-.section,.dash-card{background:#fff;border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
-.section h2{font-size:16px;color:#374151;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
-.d-label{font-size:12px;color:var(--muted);margin-bottom:5px}.d-value{font-size:24px;font-weight:800;color:var(--primary)}
-.input-row{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:12px}.input-row input,.input-row select{flex:1;min-width:120px}
-.radio-group{display:flex;gap:8px;flex-wrap:wrap}.radio-group label{background:#f3f4f6;border-radius:6px;padding:8px 10px;font-weight:700;font-size:13px}
-.action-btn{padding:10px 15px;color:#fff}.btn-blue{background:var(--primary)}.btn-amber{background:var(--amber)}.btn-teal{background:var(--teal)}.btn-gray{background:#6b7280}.btn-green{background:#16a34a}.btn-red{background:var(--danger)}
-.btn-sm{padding:6px 10px;font-size:12px}
-.bill-row{background:#eff6ff;border-radius:8px;padding:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-.bill-input{font-weight:700}.bill-input input{width:72px;text-align:right}
-.backup-help{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:8px;padding:12px;margin-bottom:10px;font-size:13px;line-height:1.45}
-.data-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.backup-btn{min-height:44px}
-.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden}th,td{border-bottom:1px solid #e5e7eb;padding:10px;text-align:center;font-size:13px}th{background:#f3f4f6}.td-left{text-align:left}
-.text-income,.text-in{color:var(--teal);font-weight:800}.text-expense,.text-out{color:var(--danger);font-weight:800}
-.product-grid,.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:14px}
-.product-card,.inv-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:13px;text-align:center}
-.product-card{background:#fff7ed;border-color:#fed7aa}.p-name{font-weight:800;margin-bottom:5px}.p-price,.p-stock,.small-note{font-size:12px;color:var(--muted);margin-top:6px}
-.qty-ctrl{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:8px}.qty-btn{width:28px;height:28px;border-radius:50%;background:#e5e7eb}.qty-in{width:48px;text-align:center;padding:4px}
-.pay-bar{background:#ffedd5;border-radius:8px;padding:12px;text-align:center;font-size:18px;font-weight:800;margin-bottom:12px}.pay-bar span{color:#c2410c}
-.inspect-table th{position:sticky;top:0}.inspect-table td:first-child,.inspect-table th:first-child{position:sticky;left:0;background:#fff;text-align:left;min-width:110px}.inspect-check{width:22px;height:22px}
-.period-badge{display:inline-block;background:#f3f4f6;border-radius:999px;padding:2px 8px;font-size:12px;color:var(--muted);font-weight:700}
-.pay-request{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px;margin-bottom:10px}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;align-items:center;justify-content:center}.modal-bg.open{display:flex}.modal-box{background:#fff;border-radius:10px;padding:22px;width:92%;max-width:680px;max-height:82vh;overflow:auto}.modal-close{float:right;background:transparent;font-size:24px;color:var(--muted)}
-@media(max-width:700px){.app-logo{display:none}.tab-content{padding:14px}.app-header{padding-left:6px}.status{display:none}}
+:root{--primary:#2b6cb0;--amber:#ed8936;--teal:#38a169;--purple:#805ad5;--danger:#e53e3e;--bg:#f0f4f8;--box:#fff;--text:#2d3748;--muted:#718096;--border:#e2e8f0;--radius:10px}*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}button{cursor:pointer;font-family:inherit;border:none;border-radius:6px;font-weight:bold}button:hover{opacity:.86}input,select{font-family:inherit;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--text)}input:focus,select:focus{outline:2px solid var(--primary);outline-offset:1px}#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#ebf8ff 0%,#fffaf0 100%)}.login-box{background:var(--box);border-radius:16px;padding:46px 38px;box-shadow:0 8px 32px rgba(0,0,0,.12);width:360px;text-align:center}.login-logo{font-size:48px;margin-bottom:8px}.login-title{font-size:24px;font-weight:bold;color:var(--primary);margin-bottom:4px}.login-sub{font-size:13px;color:var(--muted);margin-bottom:24px}.login-box input{width:100%;margin-bottom:12px;text-align:center;letter-spacing:3px}.login-btn{width:100%;padding:12px;font-size:16px;background:var(--primary);color:#fff}.login-error{color:var(--danger);font-size:13px;margin-top:8px;min-height:18px}.login-hint{font-size:12px;color:var(--muted);margin-top:14px}#appScreen{display:none;min-height:100vh}.app-header{background:var(--box);padding:0 18px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;align-items:center;position:sticky;top:0;z-index:100}.app-logo{font-size:15px;font-weight:bold;color:var(--primary);padding:16px 16px 16px 0;white-space:nowrap;border-right:1px solid var(--border);margin-right:8px}.tab-nav{display:flex;flex:1;overflow-x:auto}.tab-btn{padding:16px 18px;font-size:14px;color:var(--muted);background:none;border-bottom:3px solid transparent;border-radius:0;white-space:nowrap}.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}.logout-btn{padding:8px 14px;background:#edf2f7;color:var(--text);font-size:12px;margin-left:8px;white-space:nowrap}.status{font-size:11px;padding:4px 9px;border-radius:99px;margin-left:8px;white-space:nowrap;font-weight:bold}.online{background:#c6f6d5;color:#276749}.offline{background:#fed7d7;color:#9b2c2c}.syncing{background:#bee3f8;color:#2a69ac}.tab-content{display:none;padding:24px;max-width:980px;margin:0 auto}.tab-content.active{display:block}.section,.card{background:var(--box);border-radius:var(--radius);padding:20px 24px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:20px}.section h2{font-size:15px;color:var(--muted);margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}.dash-card{background:var(--box);border-radius:var(--radius);padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center}.d-label{font-size:12px;color:var(--muted);margin-bottom:6px}.d-value{font-size:26px;font-weight:bold;color:var(--primary)}.input-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.input-row input,.input-row select{flex:1;min-width:120px}.action-btn{padding:10px 18px;color:#fff}.btn-blue{background:var(--primary)}.btn-amber{background:var(--amber)}.btn-teal{background:var(--teal)}.btn-gray{background:#a0aec0}.btn-red{background:var(--danger)}.btn-green{background:#38a169}.btn-sm{padding:5px 10px;font-size:12px}.bill-row{background:#ebf8ff;padding:14px;border-radius:8px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:12px 0}.bill-input{display:flex;align-items:center;gap:6px;font-weight:bold;font-size:14px}.bill-input input{width:72px;text-align:right}.calc-display{font-weight:bold;color:var(--primary);font-size:15px}.radio-group{display:flex;gap:10px;flex-wrap:wrap}.radio-group label{padding:8px 14px;border-radius:6px;background:#edf2f7;cursor:pointer;font-size:13px;font-weight:bold}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:var(--box);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}th,td{padding:11px 14px;text-align:center;border-bottom:1px solid var(--border);font-size:13px}th{background:#edf2f7}.td-left{text-align:left}.text-income,.text-in{color:var(--teal);font-weight:bold}.text-expense{color:var(--danger);font-weight:bold}.text-out{color:var(--amber);font-weight:bold}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:16px}.product-card{background:#fffaf0;border:1px solid #feebc8;border-radius:8px;padding:14px;text-align:center;position:relative}.p-del{position:absolute;top:4px;right:4px;background:#fc8181;color:#fff;width:18px;height:18px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center}.p-name{font-weight:bold;font-size:15px;margin:4px 0}.p-price{font-size:13px;color:var(--muted);margin-bottom:4px}.p-stock{font-size:11px;color:var(--muted);margin-bottom:8px}.qty-ctrl{display:flex;justify-content:center;align-items:center;gap:8px}.qty-btn{background:#e2e8f0;width:28px;height:28px;border-radius:50%;font-size:16px}.qty-in{width:48px;text-align:center;padding:4px}.pay-bar{background:#feebc8;border-radius:8px;padding:14px;text-align:center;font-size:18px;font-weight:bold;margin-bottom:16px}.pay-bar span{color:#c05621;font-size:22px}.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:20px}.inv-card{background:var(--box);border-radius:var(--radius);padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center;border-top:4px solid var(--amber)}.inv-card h3{font-size:13px;color:var(--muted);margin-bottom:8px}.inv-count{font-size:22px;font-weight:bold}.inv-del{background:none;color:var(--danger);font-size:12px;padding:0;margin-left:4px}.data-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-bottom:12px}.teacher-only{display:none}.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center}.modal-bg.open{display:flex}.modal-box{background:var(--box);border-radius:14px;padding:28px;width:90%;max-width:620px;max-height:80vh;overflow-y:auto}.modal-close{float:right;font-size:24px;color:var(--muted);background:none}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}@media(max-width:600px){.stats-grid{grid-template-columns:1fr}.app-logo{display:none}}.stats-box{background:#fffaf0;border:1px solid #feebc8;border-radius:8px;padding:14px}.stats-box h3{font-size:14px;color:#c05621;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #feebc8}.stats-ul{list-style:none}.stats-ul li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--border);font-size:13px}.small-note{font-size:12px;color:var(--muted);margin-top:8px}.danger-note{font-size:12px;color:#9b2c2c;margin-top:8px}.backup-help{background:#ebf8ff;border:1px solid #bee3f8;border-radius:8px;padding:12px 14px;margin:10px 0 12px;font-size:13px;color:#2c5282;line-height:1.45}.backup-bar{justify-content:flex-start;align-items:stretch}.backup-btn{font-size:15px;padding:13px 18px;min-height:48px}.backup-btn-main{font-size:16px;padding:15px 22px;min-height:54px}.safe-note{background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;padding:12px 14px;font-size:13px;color:#276749;line-height:1.45;margin-top:12px}
+
+.inspect-table th{position:sticky;top:0;z-index:2}.inspect-table td:first-child,.inspect-table th:first-child{position:sticky;left:0;background:#fff;z-index:3;text-align:left;min-width:110px}.inspect-check{width:22px;height:22px}.pay-request{border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:12px;background:#fffaf0}.pay-request h3{font-size:15px;margin-bottom:8px;color:#c05621}.pay-list{width:100%;border-collapse:collapse;margin-top:8px}.pay-list th,.pay-list td{box-shadow:none;padding:6px 8px;font-size:12px}.period-badge{display:inline-block;background:#edf2f7;border-radius:99px;padding:2px 8px;font-size:12px;color:var(--muted);font-weight:bold}
 </style>
 </head>
 <body>
 <div id="loginScreen">
   <div class="login-box">
-    <h1>오구 운영센터</h1>
+    <h1>🏫 오구 운영센터</h1>
     <p>역할 계정으로 로그인하세요.</p>
-    <select id="loginRole">
+    <select id="loginRole" style="width:100%;margin-bottom:10px">
       <option value="teacher">교사 관리자</option>
       <option value="operator">금고·마트·재고 통합 운영</option>
       <option value="tooth">양치검사 담당</option>
@@ -68,100 +24,127 @@ input,select{font-family:inherit;padding:9px 11px;border:1px solid var(--border)
       <option value="lunch">급식검사 담당</option>
     </select>
     <input type="password" id="loginPw" placeholder="비밀번호 입력">
-    <button onclick="login()">입장하기</button>
+    <button onclick="window.login()">입장하기</button>
     <div class="login-error" id="loginError"></div>
-    <p class="small-note">버전: 2026-06-26-backup-restore</p>
+    <div class="login-hint">
+      Firebase Auth 보안 로그인 사용<br>
+      <span style="font-size:11px;color:#718096">버전: 2026-06-12-auth-safe-v4-products-readfix</span>
+    </div>
   </div>
 </div>
+<div id="appScreen"><div class="app-header"><div class="app-logo">🏫 오구 운영센터</div><div class="tab-nav"><button class="tab-btn active" id="btnVault" onclick="switchTab('vault',this)">💰 금고</button><button class="tab-btn" id="btnMart" onclick="switchTab('mart',this)">🛒 마트</button><button class="tab-btn" id="btnStock" onclick="switchTab('stock',this)">📦 재고</button><button class="tab-btn inspect-tab" id="btnTooth" onclick="switchTab('tooth',this)">🪥 양치</button><button class="tab-btn inspect-tab" id="btnMilk" onclick="switchTab('milk',this)">🥛 우유</button><button class="tab-btn inspect-tab" id="btnLunch" onclick="switchTab('lunch',this)">🍱 급식</button><button class="tab-btn teacher-only" id="btnAdmin" onclick="switchTab('admin',this)">⚙️ 관리</button></div><span class="status syncing" id="netStatus">연결 중</span><span class="status" id="roleStatus" style="background:#edf2f7;color:#2d3748">미로그인</span><button class="logout-btn" onclick="logout()">로그아웃</button></div>
+<div id="tab-vault" class="tab-content active"><div class="grid"><div class="dash-card"><div class="d-label">현재 금고 총 잔액</div><div class="d-value" id="vaultTotal">0 오구</div></div><div class="dash-card"><div class="d-label">1,000오구</div><div class="d-value" style="font-size:20px" id="cnt1000">0장</div></div><div class="dash-card"><div class="d-label">500오구</div><div class="d-value" style="font-size:20px" id="cnt500">0장</div></div><div class="dash-card"><div class="d-label">100오구</div><div class="d-value" style="font-size:20px" id="cnt100">0장</div></div></div><div class="section"><h2>💰 금고 기록</h2><div class="input-row" style="margin-bottom:12px"><input type="date" id="vaultDate"><select id="vaultStudent"></select><select id="vaultReason"></select><input type="text" id="vaultDesc" placeholder="기타일 때만 직접 입력" style="flex:2"><div class="radio-group"><label><input type="radio" name="vaultType" value="income" checked onchange="updateVaultReasonOptions()"> 📥 수입</label><label><input type="radio" name="vaultType" value="expense" onchange="updateVaultReasonOptions()"> 📤 지출</label></div></div><div class="bill-row"><div class="bill-input">1,000오구 <input type="number" id="bill1000" min="0" placeholder="0"> 장</div><div class="bill-input">500오구 <input type="number" id="bill500" min="0" placeholder="0"> 장</div><div class="bill-input">100오구 <input type="number" id="bill100" min="0" placeholder="0"> 장</div><div class="calc-display">합계: <span id="vaultCalc">0</span> 오구</div></div><button class="action-btn btn-blue" onclick="addVault()">금고에 기록하기</button><span class="small-note" id="vaultMsg"></span></div><div class="section" id="paymentRequestSection"><h2>📨 검사 지급 요청함</h2><div id="paymentRequestList"><div class="small-note">미처리 지급 요청이 없습니다.</div></div></div><div class="backup-help">금고 기록을 안전하게 보관하려면 가끔 저장 파일을 만들어 두세요. 버튼을 누르면 이 컴퓨터에 백업 파일이 내려받아집니다.</div><div class="data-bar backup-bar"><button class="action-btn btn-gray backup-btn" onclick="document.getElementById('vaultImportFile').click()">저장한 금고 파일 불러오기</button><input type="file" id="vaultImportFile" accept=".csv,.json" style="display:none" onchange="importVaultFile(event)"><button class="action-btn btn-green backup-btn" onclick="exportVaultCSV()">엑셀용 금고 표 저장</button><button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadJSON('오구금고_백업', vaultLogs)">금고 기록 안전 저장</button></div><div class="table-wrap"><table><thead><tr><th>날짜</th><th>학생</th><th>내용</th><th>지폐내역</th><th>수입(+)</th><th>지출(-)</th></tr></thead><tbody id="vaultTableBody"></tbody></table></div></div>
+<div id="tab-mart" class="tab-content"><div class="grid"><div class="dash-card"><div class="d-label">총 판매 수익</div><div class="d-value" style="color:var(--amber)" id="martTotal">0 오구</div></div></div><div class="section"><h2>🛒 마트 판매</h2><div class="input-row" style="margin-bottom:12px"><label style="font-weight:bold">손님 선택:</label><select id="studentSelect" style="flex:1"></select></div><div style="background:#edf2f7;padding:12px;border-radius:8px;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-weight:bold;font-size:13px">➕ 상품 추가:</span><input type="text" id="newProductName" placeholder="상품명" style="flex:1;min-width:100px"><input type="number" id="newProductPrice" placeholder="가격" style="width:90px"><input type="text" id="newProductStockItem" placeholder="재고품목명" style="flex:1;min-width:120px"><button class="action-btn btn-gray btn-sm" onclick="addProduct()">추가</button><button class="action-btn btn-teal btn-sm" onclick="restoreDefaultProducts()">기본 상품 복구</button></div><div class="product-grid" id="productGrid"></div><div class="pay-bar">결제할 금액: <span id="currentTotal">0</span> 오구</div><button class="action-btn btn-amber" style="width:100%;padding:14px;font-size:16px" onclick="processSale()">결제 완료 및 장부 기록</button><div class="small-note">결제하면 판매 장부 저장 + 재고 자동 차감이 거의 즉시 반영됩니다.</div></div><div class="backup-help">마트 판매 기록도 따로 저장해 두면 안심입니다. 잘못되었을 때 선생님에게 이 파일을 보내면 확인하기 쉽습니다.</div><div class="data-bar backup-bar"><button class="action-btn btn-gray backup-btn" onclick="document.getElementById('martImportFile').click()">저장한 마트 표 불러오기</button><input type="file" id="martImportFile" accept=".csv" style="display:none" onchange="importMartFile(event)"><button class="action-btn btn-amber backup-btn" onclick="openStatsModal()">마트 통계 보기</button><button class="action-btn btn-green backup-btn" onclick="exportMartCSV()">엑셀용 마트 표 저장</button><button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadJSON('오구마트_백업', salesData)">마트 기록 안전 저장</button></div><div class="table-wrap"><table><thead><tr><th>시간</th><th>학생</th><th>구매 내역</th><th>금액</th></tr></thead><tbody id="martTableBody"></tbody></table></div></div>
+<div id="tab-stock" class="tab-content"><div class="inv-grid" id="inventoryGrid"></div><div class="section"><h2>📦 재고 기록</h2><div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap"><input type="text" id="newItemInput" placeholder="새 품목 이름" style="flex:1"><button class="action-btn btn-teal btn-sm" onclick="addStockItem()">품목 추가</button><button class="action-btn btn-blue btn-sm" onclick="restoreDefaultProducts()">기본 재고품목 복구</button></div><div class="input-row"><select id="stockItemSelect"></select><div class="radio-group"><label><input type="radio" name="stockType" value="in" checked> 입고(+)</label><label><input type="radio" name="stockType" value="out"> 판매(-)</label></div><input type="number" id="stockQty" placeholder="수량" min="1" style="width:80px"><input type="date" id="stockDate"><button class="action-btn btn-teal" onclick="addStockLog()">기록하기</button></div></div><div class="backup-help">재고는 기록을 모아서 계산합니다. 재고가 이상해 보일 때를 대비해 재고 기록 저장 파일을 자주 만들어 두세요.</div><div class="data-bar backup-bar"><button class="action-btn btn-gray backup-btn" onclick="document.getElementById('stockImportFile').click()">저장한 재고 파일 불러오기</button><input type="file" id="stockImportFile" accept=".csv,.json" style="display:none" onchange="importStockFile(event)"><button class="action-btn btn-green backup-btn" onclick="exportStockCSV()">엑셀용 재고 표 저장</button><button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadJSON('오구재고_백업',{items:stockItems,logs:stockLogs})">재고 기록 안전 저장</button></div><div class="table-wrap"><table><thead><tr><th>날짜</th><th>품목</th><th>구분</th><th>수량</th></tr></thead><tbody id="stockTableBody"></tbody></table></div></div>
 
-<div id="appScreen">
-  <div class="app-header">
-    <div class="app-logo">오구 운영센터</div>
-    <div class="tab-nav">
-      <button class="tab-btn active" id="btnVault" onclick="switchTab('vault',this)">금고</button>
-      <button class="tab-btn" id="btnMart" onclick="switchTab('mart',this)">마트</button>
-      <button class="tab-btn" id="btnStock" onclick="switchTab('stock',this)">재고</button>
-      <button class="tab-btn" id="btnTooth" onclick="switchTab('tooth',this)">양치</button>
-      <button class="tab-btn" id="btnMilk" onclick="switchTab('milk',this)">우유</button>
-      <button class="tab-btn" id="btnLunch" onclick="switchTab('lunch',this)">급식</button>
-      <button class="tab-btn" id="btnAdmin" onclick="switchTab('admin',this)">관리</button>
+<div id="tab-tooth" class="tab-content inspection-screen">
+  <div class="section">
+    <h2>🪥 양치검사 기록</h2>
+    <div class="input-row" style="margin-bottom:12px">
+      <select id="toothMonth" onchange="renderInspection('tooth')"></select>
+      <select id="toothPeriod" onchange="renderInspection('tooth')"><option value="first">상반기</option><option value="second">하반기</option></select>
+      <button class="action-btn btn-blue" onclick="renderInspection('tooth')">달력 보기</button>
+      <button class="action-btn btn-teal" onclick="showInspectionCalc('tooth')">계산</button>
+      <button class="action-btn btn-amber" onclick="submitInspectionPayment('tooth')">금고로 송신</button>
     </div>
-    <span class="status syncing" id="netStatus">연결 중</span>
-    <span class="status" id="roleStatus">미로그인</span>
-    <button class="logout-btn" onclick="logout()">로그아웃</button>
+    <div class="small-note">체크 = 통과, 빈칸 = 미통과입니다. 해당 월의 실제 검사 가능일을 모두 넣고 상·하반기를 고르게 나눕니다. 주말·공휴일·방학·자율휴업일은 자동 제외됩니다. 양치·우유는 검사일의 70% 이상 통과 시 100오구, 급식은 50% 이상 100오구·80% 이상 200오구입니다. 올클리어 보너스 100오구는 하반기에만 지급됩니다.</div>
+    <div class="backup-help">양치 담당자는 이 버튼으로 양치검사 기록만 따로 저장할 수 있습니다. 체크 기록이 이상할 때 이 파일을 선생님에게 보내면 됩니다.</div>
+    <div class="data-bar backup-bar">
+      <button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadInspectionBackup('tooth')">양치검사 기록 안전 저장</button>
+    </div>
+    <div class="table-wrap" id="toothTableWrap"></div>
+    <div id="toothCalc" class="section" style="margin-top:16px;display:none"></div>
   </div>
-
-  <div id="tab-vault" class="tab-content active">
-    <div class="grid">
-      <div class="dash-card"><div class="d-label">현재 금고 총 잔액</div><div class="d-value" id="vaultTotal">0 오구</div></div>
-      <div class="dash-card"><div class="d-label">1,000오구</div><div class="d-value" id="cnt1000">0장</div></div>
-      <div class="dash-card"><div class="d-label">500오구</div><div class="d-value" id="cnt500">0장</div></div>
-      <div class="dash-card"><div class="d-label">100오구</div><div class="d-value" id="cnt100">0장</div></div>
+</div>
+<div id="tab-milk" class="tab-content inspection-screen">
+  <div class="section">
+    <h2>🥛 우유검사 기록</h2>
+    <div class="input-row" style="margin-bottom:12px">
+      <select id="milkMonth" onchange="renderInspection('milk')"></select>
+      <select id="milkPeriod" onchange="renderInspection('milk')"><option value="first">상반기</option><option value="second">하반기</option></select>
+      <button class="action-btn btn-blue" onclick="renderInspection('milk')">달력 보기</button>
+      <button class="action-btn btn-teal" onclick="showInspectionCalc('milk')">계산</button>
+      <button class="action-btn btn-amber" onclick="submitInspectionPayment('milk')">금고로 송신</button>
     </div>
-    <div class="section">
-      <h2>금고 기록</h2>
-      <div class="input-row"><input type="date" id="vaultDate"><select id="vaultStudent"></select><select id="vaultReason"></select><input type="text" id="vaultDesc" placeholder="내용 또는 메모"><div class="radio-group"><label><input type="radio" name="vaultType" value="income" checked onchange="updateVaultReasonOptions()"> 수입</label><label><input type="radio" name="vaultType" value="expense" onchange="updateVaultReasonOptions()"> 지출</label></div></div>
-      <div class="bill-row"><div class="bill-input">1,000오구 <input type="number" id="bill1000" min="0" placeholder="0"> 장</div><div class="bill-input">500오구 <input type="number" id="bill500" min="0" placeholder="0"> 장</div><div class="bill-input">100오구 <input type="number" id="bill100" min="0" placeholder="0"> 장</div><b>합계: <span id="vaultCalc">0</span> 오구</b></div>
-      <button class="action-btn btn-blue" onclick="addVault()">금고에 기록하기</button> <span class="small-note" id="vaultMsg"></span>
+    <div class="small-note">체크 = 통과, 빈칸 = 미통과입니다. 해당 월의 실제 검사 가능일을 모두 넣고 상·하반기를 고르게 나눕니다. 주말·공휴일·방학·자율휴업일은 자동 제외됩니다. 양치·우유는 검사일의 70% 이상 통과 시 100오구, 급식은 50% 이상 100오구·80% 이상 200오구입니다. 올클리어 보너스 100오구는 하반기에만 지급됩니다.</div>
+    <div class="backup-help">우유 담당자는 이 버튼으로 우유검사 기록만 따로 저장할 수 있습니다. 체크 기록이 이상할 때 이 파일을 선생님에게 보내면 됩니다.</div>
+    <div class="data-bar backup-bar">
+      <button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadInspectionBackup('milk')">우유검사 기록 안전 저장</button>
     </div>
-    <div class="section"><h2>검사 지급 요청함</h2><div id="paymentRequestList"></div></div>
-    <div class="backup-help">금고 기록을 안전하게 보관하려면 저장 파일을 만들어 두세요. 저장한 JSON/CSV 파일은 다시 불러올 수 있습니다.</div>
-    <div class="data-bar"><button class="action-btn btn-gray backup-btn" onclick="pickFile('vaultImportFile')">저장한 금고 파일 불러오기</button><input type="file" id="vaultImportFile" accept=".csv,.json" style="display:none" onchange="importVaultFile(event)"><button class="action-btn btn-green backup-btn" onclick="exportVaultCSV()">엑셀용 금고 표 저장</button><button class="action-btn btn-blue backup-btn" onclick="downloadJSON('오구금고_백업',vaultLogs)">금고 기록 안전 저장</button></div>
-    <div class="table-wrap"><table><thead><tr><th>날짜</th><th>학생</th><th>내용</th><th>지폐내역</th><th>수입</th><th>지출</th></tr></thead><tbody id="vaultTableBody"></tbody></table></div>
+    <div class="table-wrap" id="milkTableWrap"></div>
+    <div id="milkCalc" class="section" style="margin-top:16px;display:none"></div>
   </div>
-
-  <div id="tab-mart" class="tab-content">
-    <div class="grid"><div class="dash-card"><div class="d-label">총 판매 수익</div><div class="d-value" style="color:var(--amber)" id="martTotal">0 오구</div></div></div>
-    <div class="section">
-      <h2>마트 판매</h2>
-      <div class="input-row"><label><b>손님 선택</b></label><select id="studentSelect"></select></div>
-      <div class="input-row"><input type="text" id="newProductName" placeholder="상품명"><input type="number" id="newProductPrice" placeholder="가격"><input type="text" id="newProductStockItem" placeholder="재고품목명"><button class="action-btn btn-gray btn-sm" onclick="addProduct()">상품 추가</button><button class="action-btn btn-teal btn-sm" onclick="restoreDefaultProducts()">기본 상품 복구</button></div>
-      <div class="product-grid" id="productGrid"></div>
-      <div class="pay-bar">결제할 금액: <span id="currentTotal">0</span> 오구</div>
-      <button class="action-btn btn-amber" style="width:100%;padding:14px;font-size:16px" onclick="processSale()">결제 완료 및 장부 기록</button>
+</div>
+<div id="tab-lunch" class="tab-content inspection-screen">
+  <div class="section">
+    <h2>🍱 급식검사 기록</h2>
+    <div class="input-row" style="margin-bottom:12px">
+      <select id="lunchMonth" onchange="renderInspection('lunch')"></select>
+      <select id="lunchPeriod" onchange="renderInspection('lunch')"><option value="first">상반기</option><option value="second">하반기</option></select>
+      <button class="action-btn btn-blue" onclick="renderInspection('lunch')">달력 보기</button>
+      <button class="action-btn btn-teal" onclick="showInspectionCalc('lunch')">계산</button>
+      <button class="action-btn btn-amber" onclick="submitInspectionPayment('lunch')">금고로 송신</button>
     </div>
-    <div class="backup-help">마트 안전 저장 파일(JSON)과 엑셀용 CSV 파일을 모두 다시 불러올 수 있습니다.</div>
-    <div class="data-bar"><button class="action-btn btn-gray backup-btn" onclick="pickFile('martImportFile')">저장한 마트 파일 불러오기</button><input type="file" id="martImportFile" accept=".csv,.json" style="display:none" onchange="importMartFile(event)"><button class="action-btn btn-amber backup-btn" onclick="openStatsModal()">마트 통계 보기</button><button class="action-btn btn-green backup-btn" onclick="exportMartCSV()">엑셀용 마트 표 저장</button><button class="action-btn btn-blue backup-btn" onclick="downloadJSON('오구마트_백업',salesData)">마트 기록 안전 저장</button></div>
-    <div class="table-wrap"><table><thead><tr><th>시간</th><th>학생</th><th>구매 내역</th><th>금액</th></tr></thead><tbody id="martTableBody"></tbody></table></div>
-  </div>
-
-  <div id="tab-stock" class="tab-content">
-    <div class="inv-grid" id="inventoryGrid"></div>
-    <div class="section">
-      <h2>재고 기록</h2>
-      <div class="input-row"><input type="text" id="newItemInput" placeholder="새 품목 이름"><button class="action-btn btn-teal btn-sm" onclick="addStockItem()">품목 추가</button><button class="action-btn btn-blue btn-sm" onclick="restoreDefaultProducts()">기본 재고품목 복구</button></div>
-      <div class="input-row"><select id="stockItemSelect"></select><div class="radio-group"><label><input type="radio" name="stockType" value="in" checked> 입고</label><label><input type="radio" name="stockType" value="out"> 판매</label></div><input type="number" id="stockQty" placeholder="수량" min="1"><input type="date" id="stockDate"><button class="action-btn btn-teal" onclick="addStockLog()">기록하기</button></div>
+    <div class="small-note">체크 = 통과, 빈칸 = 미통과입니다. 해당 월의 실제 검사 가능일을 모두 넣고 상·하반기를 고르게 나눕니다. 주말·공휴일·방학·자율휴업일은 자동 제외됩니다. 양치·우유는 검사일의 70% 이상 통과 시 100오구, 급식은 50% 이상 100오구·80% 이상 200오구입니다. 올클리어 보너스 100오구는 하반기에만 지급됩니다.</div>
+    <div class="backup-help">급식 담당자는 이 버튼으로 급식검사 기록만 따로 저장할 수 있습니다. 체크 기록이 이상할 때 이 파일을 선생님에게 보내면 됩니다.</div>
+    <div class="data-bar backup-bar">
+      <button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadInspectionBackup('lunch')">급식검사 기록 안전 저장</button>
     </div>
-    <div class="backup-help">재고 안전 저장 파일(JSON)과 엑셀용 CSV 파일을 다시 불러올 수 있습니다.</div>
-    <div class="data-bar"><button class="action-btn btn-gray backup-btn" onclick="pickFile('stockImportFile')">저장한 재고 파일 불러오기</button><input type="file" id="stockImportFile" accept=".csv,.json" style="display:none" onchange="importStockFile(event)"><button class="action-btn btn-green backup-btn" onclick="exportStockCSV()">엑셀용 재고 표 저장</button><button class="action-btn btn-blue backup-btn" onclick="downloadJSON('오구재고_백업',{items:stockItems,logs:stockLogs})">재고 기록 안전 저장</button></div>
-    <div class="table-wrap"><table><thead><tr><th>날짜</th><th>품목</th><th>구분</th><th>수량</th></tr></thead><tbody id="stockTableBody"></tbody></table></div>
+    <div class="table-wrap" id="lunchTableWrap"></div>
+    <div id="lunchCalc" class="section" style="margin-top:16px;display:none"></div>
   </div>
-
-  <div id="tab-tooth" class="tab-content inspection-screen"></div>
-  <div id="tab-milk" class="tab-content inspection-screen"></div>
-  <div id="tab-lunch" class="tab-content inspection-screen"></div>
-
-  <div id="tab-admin" class="tab-content">
+</div>
+<div id="tab-admin" class="tab-content">
     <div class="section">
-      <h2>관리자 페이지</h2>
-      <div class="grid">
-        <div class="dash-card"><div class="d-label">금고 기록 수</div><div class="d-value" id="adminVaultCount">0개</div></div>
-        <div class="dash-card"><div class="d-label">마트 판매 수</div><div class="d-value" id="adminSaleCount">0개</div></div>
-        <div class="dash-card"><div class="d-label">재고 기록 수</div><div class="d-value" id="adminStockCount">0개</div></div>
+      <h2>⚙️ 관리자 페이지</h2>
+      <div class="data-bar" style="justify-content:flex-start;margin-bottom:16px">
+        <button class="action-btn btn-blue btn-sm" onclick="switchTab('vault',document.getElementById('btnVault'))">금고 화면 보기</button>
+        <button class="action-btn btn-amber btn-sm" onclick="switchTab('mart',document.getElementById('btnMart'))">마트 화면 보기</button>
+        <button class="action-btn btn-teal btn-sm" onclick="switchTab('stock',document.getElementById('btnStock'))">재고 화면 보기</button>
+        <button class="action-btn btn-blue btn-sm" onclick="switchTab('tooth',document.getElementById('btnTooth'))">양치검사 보기</button>
+        <button class="action-btn btn-blue btn-sm" onclick="switchTab('milk',document.getElementById('btnMilk'))">우유검사 보기</button>
+        <button class="action-btn btn-blue btn-sm" onclick="switchTab('lunch',document.getElementById('btnLunch'))">급식검사 보기</button>
       </div>
-      <h2>전체 기록 안전 저장/불러오기</h2>
-      <div class="backup-help">전체 백업은 교사 관리자만 불러올 수 있습니다. 불러오기 전에는 현재 전체 백업을 먼저 내려받아 두세요.</div>
-      <div class="data-bar"><button class="action-btn btn-gray backup-btn" onclick="pickFile('fullImportFile')">전체 백업 불러오기</button><input type="file" id="fullImportFile" accept=".json" style="display:none" onchange="importFullBackupFile(event)"><button class="action-btn btn-blue backup-btn" onclick="downloadJSON('오구운영센터_전체백업',getFullBackupData())">전체 기록 안전 저장</button><button class="action-btn btn-green backup-btn" onclick="exportVaultCSV()">금고 CSV</button><button class="action-btn btn-green backup-btn" onclick="exportMartCSV()">마트 CSV</button><button class="action-btn btn-green backup-btn" onclick="exportStockCSV()">재고 CSV</button></div>
-      <p class="small-note">계정: teacher@ogu.class / operator@ogu.class / tooth@ogu.class / milk@ogu.class / lunch@ogu.class</p>
+
+      <div class="grid">
+        <div class="dash-card">
+          <div class="d-label">금고 기록 수</div>
+          <div class="d-value" style="font-size:24px" id="adminVaultCount">0개</div>
+        </div>
+        <div class="dash-card">
+          <div class="d-label">마트 판매 수</div>
+          <div class="d-value" style="font-size:24px;color:var(--amber)" id="adminSaleCount">0개</div>
+        </div>
+        <div class="dash-card">
+          <div class="d-label">재고 기록 수</div>
+          <div class="d-value" style="font-size:24px;color:var(--teal)" id="adminStockCount">0개</div>
+        </div>
+      </div>
+
+      <h2 style="margin-top:10px">🔐 로그인 계정 안내</h2>
+      <div class="small-note">
+        비밀번호는 이제 Firebase Authentication에서 관리합니다. 앱 안에 비밀번호를 저장하지 않습니다.<br>
+        교사: teacher@ogu.class / 운영: operator@ogu.class / 양치: tooth@ogu.class / 우유: milk@ogu.class / 급식: lunch@ogu.class
+      </div>
+      <h2 style="margin-top:20px">📦 전체 기록 안전 저장</h2>
+      <div class="backup-help">금고, 마트, 재고, 양치, 우유, 급식 기록을 한 번에 저장하는 버튼입니다. 혹시 기록이 이상해지면 이 파일로 확인할 수 있습니다.</div>
+      <div class="data-bar backup-bar">
+        <button class="action-btn btn-green backup-btn" onclick="exportVaultCSV()">엑셀용 금고 표 저장</button>
+        <button class="action-btn btn-green backup-btn" onclick="exportMartCSV()">엑셀용 마트 표 저장</button>
+        <button class="action-btn btn-green backup-btn" onclick="exportStockCSV()">엑셀용 재고 표 저장</button>
+        <button class="action-btn btn-blue backup-btn backup-btn-main" onclick="downloadJSON('오구운영센터_전체백업',getFullBackupData())">전체 기록 안전 저장</button>
+      </div>
+
+      <h2 style="margin-top:20px">🛡️ 안전 안내</h2>
+      <div class="safe-note">실수로 기록을 지우지 않도록 이 화면의 삭제와 전체 초기화 버튼은 없앴습니다. 기록이 이상하면 먼저 전체 기록 안전 저장 파일을 만든 뒤 선생님에게 알려주세요.</div>
+
+      <div class="danger-note">주의: 이 간편판은 속도와 간소화를 우선한 버전입니다. Firebase 보안 규칙을 공개 읽기/쓰기로 쓰면 주소를 아는 사람이 접근할 수 있습니다. 학급 내부용으로만 사용하세요.</div>
     </div>
   </div>
-</div>
 
-<div class="modal-bg" id="statsModal"><div class="modal-box"><button class="modal-close" onclick="closeStatsModal()">×</button><h2>오구 마트 전체 통계</h2><div class="grid"><div><h3>일별 매출</h3><ul id="dailyStatsList"></ul></div><div><h3>상품별 판매</h3><ul id="itemStatsList"></ul></div></div></div></div>
-
+  <div class="modal-bg" id="statsModal"><div class="modal-box"><button class="modal-close" onclick="closeStatsModal()">×</button><h2 style="color:#dd6b20;margin-bottom:4px">📊 오구 마트 전체 통계</h2><div class="stats-grid"><div class="stats-box"><h3>📅 일별 매출</h3><ul class="stats-ul" id="dailyStatsList"></ul></div><div class="stats-box"><h3>📦 상품별 판매</h3><ul class="stats-ul" id="itemStatsList"></ul></div></div></div></div>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
 <script>
 const firebaseConfig={
   apiKey:"AIzaSyBoyVAq4AML1bqWu7Fff4H4sqHg5Jj_jPA",
@@ -172,142 +155,559 @@ const firebaseConfig={
   messagingSenderId:"291087499536",
   appId:"1:291087499536:web:429c24aac520c2f5d72595"
 };
-const AUTH_ACCOUNTS={teacher:{email:"teacher@ogu.class",role:"teacher",label:"교사 관리자"},operator:{email:"operator@ogu.class",role:"operator",label:"금고·마트·재고 통합 운영"},tooth:{email:"tooth@ogu.class",role:"tooth",label:"양치검사 담당"},milk:{email:"milk@ogu.class",role:"milk",label:"우유검사 담당"},lunch:{email:"lunch@ogu.class",role:"lunch",label:"급식검사 담당"}};
+const AUTH_ACCOUNTS={
+  teacher:{email:"teacher@ogu.class", role:"teacher", label:"교사 관리자"},
+  operator:{email:"operator@ogu.class", role:"operator", label:"금고·마트·재고 통합 운영"},
+  tooth:{email:"tooth@ogu.class", role:"tooth", label:"양치검사 담당"},
+  milk:{email:"milk@ogu.class", role:"milk", label:"우유검사 담당"},
+  lunch:{email:"lunch@ogu.class", role:"lunch", label:"급식검사 담당"}
+};
 const ROLE_LABELS={teacher:"교사 관리자",operator:"금고·마트·재고 통합 운영",tooth:"양치검사 담당",milk:"우유검사 담당",lunch:"급식검사 담당"};
 const STUDENTS=["1번 민동하","2번 박서준","3번 서윤수","4번 성시안","5번 오예성","6번 윤준","7번 이남기","8번 이유준","9번 이지안","10번 이휘원","11번 임수호","12번 천지훈","13번 최원재","51번 김리하","52번 김하윤","53번 박서희","54번 배소은","55번 백승아","56번 오수아","57번 이송희","58번 이정원","59번 임수빈","60번 정유안","61번 하윤서","62번 홍재이","63번 황서율"];
 const DEFAULT_PRODUCTS=[{name:"마이쮸",price:100,stockItem:"마이쮸"},{name:"제티",price:200,stockItem:"제티"},{name:"초코파이",price:500,stockItem:"초코파이"},{name:"오레오 웨하스",price:400,stockItem:"오레오 웨하스"},{name:"오예스",price:500,stockItem:"오예스"},{name:"초코칩",price:400,stockItem:"초코칩"},{name:"커피과자",price:200,stockItem:"커피과자"},{name:"갈배 사이다",price:500,stockItem:"갈배 사이다"},{name:"뽀로로 주스",price:800,stockItem:"뽀로로 주스"}];
 const DEFAULT_STOCK_ITEMS=["마이쮸","제티","초코파이","오레오 웨하스","오예스","초코칩","커피과자","갈배 사이다","뽀로로 주스","새콤달콤","모구모구"];
-const INSPECTION_INFO={tooth:{label:"양치검사"},milk:{label:"우유검사"},lunch:{label:"급식검사"}};
-const INSPECTION_MONTHS=[6,7,8,9,10,11,12];
-const HOLIDAYS_2026=new Set(["2026-06-03","2026-06-06","2026-07-17","2026-07-22","2026-07-23","2026-07-24","2026-07-25","2026-07-26","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-01","2026-08-02","2026-08-03","2026-08-04","2026-08-05","2026-08-06","2026-08-07","2026-08-08","2026-08-09","2026-08-10","2026-08-11","2026-08-12","2026-08-13","2026-08-14","2026-08-15","2026-08-16","2026-08-17","2026-09-24","2026-09-25","2026-09-26","2026-09-28","2026-10-03","2026-10-05","2026-10-09","2026-12-25"]);
-let db,currentUser=null,role=null,listenersStarted=false;
-let vaultLogs=[],salesData=[],stockLogs=[],products=[],stockItems=[],quantities={},inspectionRecords={},paymentRequests=[];
+let db,currentUser=null,role=null,vaultLogs=[],salesData=[],stockLogs=[],products=[],stockItems=[],quantities={},inspectionRecords={},paymentRequests=[];
+initFirebase();fillStudentSelects();updateVaultReasonOptions();setInterval(updateAdminSummary,1000);document.getElementById('vaultDate').valueAsDate=new Date();document.getElementById('stockDate').valueAsDate=new Date();['bill1000','bill500','bill100'].forEach(id=>document.getElementById(id).addEventListener('input',calcVaultTotal));
+const loginInput=document.getElementById('loginPw');
+if(loginInput)loginInput.addEventListener('keydown',e=>{if(e.key==='Enter')login();});
 
-initScreens();
-initFirebase();
-
-function initScreens(){
-  fillStudentSelects();
-  updateVaultReasonOptions();
-  ["bill1000","bill500","bill100"].forEach(id=>document.getElementById(id).addEventListener("input",calcVaultTotal));
-  document.getElementById("vaultDate").value=today();
-  document.getElementById("stockDate").value=today();
-  document.getElementById("loginPw").addEventListener("keydown",e=>{if(e.key==="Enter")login();});
-  renderInspectionShells();
-  setInterval(updateAdminSummary,1000);
-}
 function initFirebase(){
   try{
+    if(firebaseConfig.apiKey.includes('여기에')){
+      setNet('offline','Firebase 설정 필요');
+      document.getElementById('loginError').textContent='먼저 index.html 안의 firebaseConfig를 붙여넣어야 합니다.';
+      return;
+    }
     firebase.initializeApp(firebaseConfig);
     db=firebase.database();
+
     firebase.auth().onAuthStateChanged(user=>{
       currentUser=user||null;
-      if(!user){showLogin();return;}
-      role=getRoleByEmail(user.email);
-      if(!role){firebase.auth().signOut();return;}
-      document.getElementById("loginScreen").style.display="none";
-      document.getElementById("appScreen").style.display="block";
-      applyRoleVisibility();
-      if(role==="teacher"||role==="operator")seedDefaults();
-      listenAll();
-      switchTab(role==="teacher"?"admin":(role==="operator"?"vault":role),document.getElementById(role==="teacher"?"btnAdmin":(role==="operator"?"btnVault":"btn"+cap(role))));
+      if(user){
+        const email=(user.email||'').toLowerCase();
+        role=getRoleByEmail(email);
+        if(!role){
+          document.getElementById('loginError').textContent='등록되지 않은 역할 계정입니다.';
+          firebase.auth().signOut();
+          return;
+        }
+        document.getElementById("loginError").textContent="";
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("appScreen").style.display="block";
+        applyRoleVisibility();
+        if(role==='teacher'||role==='operator') seedDefaults();
+        listenAll();
+        fillInspectionMonthSelects();
+        const firstTab=role==="teacher"?"admin":(role==="operator"?"vault":role);
+        const firstBtn=document.getElementById(role==="teacher"?"btnAdmin":(role==="operator"?"btnVault":"btn"+cap(role)));
+        switchTab(firstTab,firstBtn);
+      }else{
+        role=null;
+        currentUser=null;
+        document.getElementById("appScreen").style.display="none";
+        document.getElementById("loginScreen").style.display="flex";
+      }
     });
-    db.ref(".info/connected").on("value",s=>setNet(s.val()?"online":"offline",s.val()?"온라인":"오프라인"));
-  }catch(e){document.getElementById("loginError").textContent="Firebase 설정 오류: "+e.message;}
+
+    db.ref('.info/connected').on('value',s=>setNet(s.val()?'online':'offline',s.val()?'온라인':'오프라인'));
+  }catch(e){
+    setNet('offline','설정 오류');
+    document.getElementById('loginError').textContent='Firebase 설정 오류: '+e.message;
+  }
 }
-function showLogin(){role=null;currentUser=null;document.getElementById("appScreen").style.display="none";document.getElementById("loginScreen").style.display="flex";}
-function getRoleByEmail(email){email=String(email||"").toLowerCase();for(const k in AUTH_ACCOUNTS){if(AUTH_ACCOUNTS[k].email===email)return AUTH_ACCOUNTS[k].role;}return null;}
-function login(){const key=document.getElementById("loginRole").value,pw=document.getElementById("loginPw").value.trim(),account=AUTH_ACCOUNTS[key];if(!pw){document.getElementById("loginError").textContent="비밀번호를 입력하세요.";return;}document.getElementById("loginError").textContent="로그인 중...";firebase.auth().signInWithEmailAndPassword(account.email,pw).catch(e=>{document.getElementById("loginError").textContent="로그인 실패: 계정 또는 비밀번호를 확인하세요.";console.error(e);});}
-function logout(){firebase.auth().signOut();}
-function applyRoleVisibility(){["btnVault","btnMart","btnStock","btnTooth","btnMilk","btnLunch","btnAdmin"].forEach(id=>document.getElementById(id).style.display="none");const show=ids=>ids.forEach(id=>document.getElementById(id).style.display="");if(role==="teacher")show(["btnVault","btnMart","btnStock","btnTooth","btnMilk","btnLunch","btnAdmin"]);else if(role==="operator")show(["btnVault","btnMart","btnStock"]);else show(["btn"+cap(role)]);document.getElementById("roleStatus").textContent=ROLE_LABELS[role]||role;}
-function switchTab(name,btn){document.querySelectorAll(".tab-content").forEach(el=>el.classList.remove("active"));document.querySelectorAll(".tab-btn").forEach(el=>el.classList.remove("active"));document.getElementById("tab-"+name).classList.add("active");if(btn)btn.classList.add("active");if(["tooth","milk","lunch"].includes(name))renderInspection(name);}
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
-function canWriteArea(area){if(role==="teacher")return true;if(area==="operation")return role==="operator";return role===area;}
-function deny(){alert("이 역할에는 저장 권한이 없습니다.");}
-async function seedDefaults(){try{const ps=await db.ref("products").get();if(!ps.exists())for(let i=0;i<DEFAULT_PRODUCTS.length;i++)await db.ref("products/p"+i).set({...DEFAULT_PRODUCTS[i],active:true,createdAt:Date.now()+i});const ss=await db.ref("stockItems").get();if(!ss.exists())for(let i=0;i<DEFAULT_STOCK_ITEMS.length;i++)await db.ref("stockItems/s"+i).set({name:DEFAULT_STOCK_ITEMS[i],active:true,createdAt:Date.now()+i});}catch(e){console.error(e);alert("기본 상품 저장 실패: Firebase 규칙을 확인하세요. 화면에는 임시 기본 상품을 보여줍니다.");}}
-function listenAll(){if(listenersStarted)return;listenersStarted=true;db.ref("vaultLogs").on("value",s=>{vaultLogs=objToArray(s.val());renderVault();renderPaymentRequests();updateAdminSummary();});db.ref("sales").on("value",s=>{salesData=objToArray(s.val());renderMart();updateAdminSummary();});db.ref("stockLogs").on("value",s=>{stockLogs=objToArray(s.val());renderStock();updateAdminSummary();});db.ref("products").on("value",s=>{products=normalizeProductsFromDb(s.val());renderProducts();});db.ref("stockItems").on("value",s=>{stockItems=normalizeStockItemsFromDb(s.val());renderStock();});db.ref("inspectionRecords").on("value",s=>{inspectionRecords=s.val()||{};["tooth","milk","lunch"].forEach(renderInspection);});db.ref("paymentRequests").on("value",s=>{paymentRequests=objToArray(s.val());renderPaymentRequests();});}
+function getRoleByEmail(email){
+  email=String(email||'').toLowerCase();
+  for(const key in AUTH_ACCOUNTS){
+    if(AUTH_ACCOUNTS[key].email.toLowerCase()===email)return AUTH_ACCOUNTS[key].role;
+  }
+  return null;
+}
+async function seedDefaults(){
+  if(!db)return;
+  if(!(role==='teacher'||role==='operator'))return;
+  try{
+    const productsSnap=await db.ref('products').get();
+    const productsData=productsSnap.val();
+    if(!productsData || Object.keys(productsData).length===0){
+      for(let i=0;i<DEFAULT_PRODUCTS.length;i++){
+        await db.ref('products/p'+i).set({...DEFAULT_PRODUCTS[i],active:true,createdAt:Date.now()+i});
+      }
+    }
 
-function fillStudentSelects(){const options='<option value="">-- 학생 선택 --</option>'+STUDENTS.map(s=>`<option>${escapeHtml(s)}</option>`).join("");document.getElementById("vaultStudent").innerHTML=options;document.getElementById("studentSelect").innerHTML=options.replace("-- 학생 선택 --","-- 구매한 학생 선택 --");}
-function updateVaultReasonOptions(){const type=document.querySelector('input[name="vaultType"]:checked').value,sel=document.getElementById("vaultReason");const opts=type==="income"?["발행","벌금","기타"]:["월급","부수입","기타"];sel.innerHTML=opts.map(x=>`<option>${x}</option>`).join("");}
-function calcVaultTotal(){document.getElementById("vaultCalc").textContent=(n("bill1000")*1000+n("bill500")*500+n("bill100")*100).toLocaleString();}
-function addVault(){if(!canWriteArea("operation"))return deny();const b1000=n("bill1000"),b500=n("bill500"),b100=n("bill100"),amount=b1000*1000+b500*500+b100*100,student=document.getElementById("vaultStudent").value,reason=document.getElementById("vaultReason").value,extra=document.getElementById("vaultDesc").value.trim(),type=document.querySelector('input[name="vaultType"]:checked').value,date=document.getElementById("vaultDate").value||today(),desc=extra||reason;if(!desc){alert("내용을 입력해주세요.");return;}if(!amount){alert("지폐 장수를 입력해주세요.");return;}const id=newId(),entry={id,date,student,desc,type,b1000,b500,b100,amount,createdAt:Date.now()};db.ref("vaultLogs/"+id).set(entry).then(()=>{document.getElementById("vaultMsg").textContent="저장 완료";setTimeout(()=>document.getElementById("vaultMsg").textContent="",1200);document.getElementById("vaultStudent").value="";document.getElementById("vaultDesc").value="";["bill1000","bill500","bill100"].forEach(id=>document.getElementById(id).value="");calcVaultTotal();}).catch(e=>saveError("금고 기록",e));}
-function renderVault(){let total=0,t1000=0,t500=0,t100=0,tbody=document.getElementById("vaultTableBody");tbody.innerHTML="";[...vaultLogs].sort((a,b)=>sortByDateThenCreated(a,b,"date",false)).forEach(e=>{const sign=e.type==="income"?1:-1;total+=sign*Number(e.amount||0);t1000+=sign*Number(e.b1000||0);t500+=sign*Number(e.b500||0);t100+=sign*Number(e.b100||0);const bills=[];if(e.b1000)bills.push("1천×"+e.b1000);if(e.b500)bills.push("5백×"+e.b500);if(e.b100)bills.push("1백×"+e.b100);tbody.innerHTML+=`<tr><td>${escapeHtml(e.date)}</td><td>${escapeHtml(e.student||"")}</td><td class="td-left">${escapeHtml(e.desc)}</td><td>${escapeHtml(bills.join(", "))}</td><td class="text-income">${e.type==="income"?"+"+Number(e.amount||0).toLocaleString():""}</td><td class="text-expense">${e.type==="expense"?"-"+Number(e.amount||0).toLocaleString():""}</td></tr>`;});document.getElementById("vaultTotal").textContent=total.toLocaleString()+" 오구";document.getElementById("cnt1000").textContent=t1000+"장";document.getElementById("cnt500").textContent=t500+"장";document.getElementById("cnt100").textContent=t100+"장";}
+    const stockItemsSnap=await db.ref('stockItems').get();
+    const stockItemsData=stockItemsSnap.val();
+    if(!stockItemsData || Object.keys(stockItemsData).length===0){
+      for(let i=0;i<DEFAULT_STOCK_ITEMS.length;i++){
+        await db.ref('stockItems/s'+i).set({name:DEFAULT_STOCK_ITEMS[i],active:true,createdAt:Date.now()+i});
+      }
+    }
+  }catch(e){
+    console.error('seedDefaults failed',e);
+    alert('기본 마트/재고 품목을 Firebase에 저장하지 못했습니다. Realtime Database Rules가 최신인지 확인하세요. 화면에는 임시 기본 품목을 보여줍니다.');
+  }
+}
+let listenersStarted=false;
 
-function normalizeProductsFromDb(raw){if(!raw)return [];return Object.entries(raw).map(([id,p])=>p?{id,...(typeof p==="string"?{name:p,price:0,stockItem:p,active:true}:p)}:null).filter(Boolean).map(p=>({id:String(p.id||safeKey(p.name)),name:String(p.name||"상품"),price:Number(p.price||0),stockItem:String(p.stockItem||p.name||""),active:p.active!==false,createdAt:Number(p.createdAt||0)})).filter(p=>p.active).sort((a,b)=>a.createdAt-b.createdAt);}
-function normalizeStockItemsFromDb(raw){if(!raw)return [];return Object.entries(raw).map(([id,v])=>typeof v==="string"?{id,name:v,active:true}:{id,...v}).filter(v=>v&&v.active!==false&&v.name).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0)).map(v=>String(v.name));}
-function effectiveProducts(){return products.length?products:DEFAULT_PRODUCTS.map((p,i)=>({id:"default_p"+i,...p,active:true}));}
-function effectiveStockItems(){return stockItems.length?stockItems:[...DEFAULT_STOCK_ITEMS];}
-function renderProducts(){const grid=document.getElementById("productGrid");grid.innerHTML="";effectiveProducts().forEach(p=>{quantities[p.id]=quantities[p.id]||0;grid.innerHTML+=`<div class="product-card"><div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${Number(p.price||0).toLocaleString()} 오구</div><div class="p-stock">재고: ${escapeHtml(p.stockItem||p.name)}</div><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('${p.id}',-1)">-</button><input type="number" id="qty_${p.id}" class="qty-in" min="0" value="${quantities[p.id]}" oninput="manualQty('${p.id}')"><button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button></div></div>`;});calcMart();}
-function addProduct(){if(!canWriteArea("operation"))return deny();const name=document.getElementById("newProductName").value.trim(),price=Number(document.getElementById("newProductPrice").value),stockItem=document.getElementById("newProductStockItem").value.trim()||name;if(!name){alert("상품명을 입력해주세요.");return;}const id=newId(),p={id,name,price,stockItem,active:true,createdAt:Date.now()};const updates={};updates["products/"+id]=p;updates["stockItems/"+safeKey(stockItem)]={name:stockItem,active:true,createdAt:Date.now()};db.ref().update(updates).then(()=>{document.getElementById("newProductName").value="";document.getElementById("newProductPrice").value="";document.getElementById("newProductStockItem").value="";}).catch(e=>saveError("상품",e));}
-function restoreDefaultProducts(){if(!canWriteArea("operation"))return deny();if(!confirm("기본 마트 상품과 재고 품목을 다시 넣을까요?"))return;const updates={};DEFAULT_PRODUCTS.forEach((p,i)=>updates["products/p"+i]={...p,active:true,createdAt:Date.now()+i});DEFAULT_STOCK_ITEMS.forEach((name,i)=>updates["stockItems/s"+i]={name,active:true,createdAt:Date.now()+i});db.ref().update(updates).then(()=>alert("기본 상품과 재고 품목을 복구했습니다.")).catch(e=>saveError("기본 상품",e));}
-function changeQty(id,delta){quantities[id]=Math.max(0,(quantities[id]||0)+delta);const el=document.getElementById("qty_"+id);if(el)el.value=quantities[id];calcMart();}
-function manualQty(id){const el=document.getElementById("qty_"+id);quantities[id]=Math.max(0,parseInt(el.value)||0);el.value=quantities[id];calcMart();}
-function calcMart(){let total=0;effectiveProducts().forEach(p=>total+=(quantities[p.id]||0)*Number(p.price||0));document.getElementById("currentTotal").textContent=total.toLocaleString();return total;}
-function processSale(){if(!canWriteArea("operation"))return deny();const student=document.getElementById("studentSelect").value,total=calcMart();if(!student){alert("구매한 학생을 선택해주세요.");return;}if(!total){alert("구매할 물건을 선택해주세요.");return;}const selected=[];effectiveProducts().forEach(p=>{const qty=quantities[p.id]||0;if(qty>0)selected.push({...p,qty});});const saleId=newId(),sale={id:saleId,time:nowText(),student,items:selected.map(p=>`${p.name} ${p.qty}개`).join(", "),total,createdAt:Date.now()};const updates={};updates["sales/"+saleId]=sale;selected.forEach(p=>{const logId=newId(),item=p.stockItem||p.name;updates["stockItems/"+safeKey(item)]={name:item,active:true};updates["stockLogs/"+logId]={id:logId,date:today(),item,type:"out",qty:p.qty,linkedSaleId:saleId,createdAt:Date.now()};});db.ref().update(updates).then(()=>{document.getElementById("studentSelect").value="";quantities={};renderProducts();}).catch(e=>saveError("마트 판매",e));}
-function renderMart(){const tbody=document.getElementById("martTableBody");tbody.innerHTML="";let grand=0;[...salesData].sort((a,b)=>sortBySaleTimeThenCreated(a,b,false)).forEach(s=>{grand+=Number(s.total||0);tbody.innerHTML+=`<tr><td>${escapeHtml(s.time)}</td><td><b>${escapeHtml(s.student)}</b></td><td class="td-left">${escapeHtml(s.items)}</td><td><b>${Number(s.total||0).toLocaleString()} 오구</b></td></tr>`;});document.getElementById("martTotal").textContent=grand.toLocaleString()+" 오구";}
+function normalizeProductsFromDb(raw){
+  if(!raw)return [];
+  let arr=[];
+  if(Array.isArray(raw)){
+    arr=raw.map((v,i)=>v?{id:String(i),...v}:null).filter(Boolean);
+  }else{
+    arr=Object.entries(raw).map(([id,v])=>{
+      if(!v)return null;
+      if(typeof v==='string')return {id,name:v,price:0,stockItem:v,active:true};
+      return {id,...v};
+    }).filter(Boolean);
+  }
+  return arr
+    .map(p=>({
+      id:String(p.id||safeKey(p.name||('상품'+Date.now()))),
+      name:String(p.name||p.productName||p.title||'이름 없는 상품'),
+      price:Number(p.price||p.amount||0),
+      stockItem:String(p.stockItem||p.item||p.name||''),
+      active:p.active===false||p.active==='false'?false:true,
+      createdAt:Number(p.createdAt||0)
+    }))
+    .filter(p=>p.active!==false)
+    .sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+}
+function normalizeStockItemsFromDb(raw){
+  if(!raw)return [];
+  let arr=[];
+  if(Array.isArray(raw)){
+    arr=raw.map((v,i)=>{
+      if(!v)return null;
+      if(typeof v==='string')return {id:String(i),name:v,active:true};
+      return {id:String(i),...v};
+    }).filter(Boolean);
+  }else{
+    arr=Object.entries(raw).map(([id,v])=>{
+      if(!v)return null;
+      if(typeof v==='string')return {id,name:v,active:true};
+      return {id,...v};
+    }).filter(Boolean);
+  }
+  return arr
+    .map(i=>({
+      id:String(i.id||safeKey(i.name||'')),
+      name:String(i.name||i.item||i.title||''),
+      active:i.active===false||i.active==='false'?false:true,
+      createdAt:Number(i.createdAt||0)
+    }))
+    .filter(i=>i.active!==false&&i.name)
+    .sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))
+    .map(i=>i.name);
+}
+function listenAll(){
+  if(!db||listenersStarted)return;
+  listenersStarted=true;
+  db.ref('vaultLogs').on('value',s=>{vaultLogs=objToArray(s.val());renderVault();renderPaymentRequests()});
+  db.ref('sales').on('value',s=>{salesData=objToArray(s.val());renderMart()});
+  db.ref('stockLogs').on('value',s=>{stockLogs=objToArray(s.val());renderStock()});
+  db.ref('products').on('value',s=>{products=normalizeProductsFromDb(s.val());renderProducts();renderAdminProducts()});
+  db.ref('stockItems').on('value',s=>{stockItems=normalizeStockItemsFromDb(s.val());renderStock()});
+  db.ref('inspectionRecords').on('value',s=>{inspectionRecords=s.val()||{};['tooth','milk','lunch'].forEach(t=>renderInspection(t))});
+  db.ref('paymentRequests').on('value',s=>{paymentRequests=objToArray(s.val());renderPaymentRequests()});
+}
+function login(){
+  const roleKey=document.getElementById("loginRole").value;
+  const pw=document.getElementById("loginPw").value.trim();
+  const account=AUTH_ACCOUNTS[roleKey];
+  if(!account){document.getElementById("loginError").textContent="역할을 선택하세요.";return}
+  if(!pw){document.getElementById("loginError").textContent="비밀번호를 입력하세요.";return}
+  document.getElementById("loginError").textContent="로그인 중...";
+  firebase.auth().signInWithEmailAndPassword(account.email,pw)
+    .catch(e=>{
+      document.getElementById("loginError").textContent="로그인 실패: 계정 또는 비밀번호를 확인하세요.";
+      console.error(e);
+    });
+}
+window.login=login;
 
-function addStockItem(){if(!canWriteArea("operation"))return deny();const item=document.getElementById("newItemInput").value.trim();if(!item){alert("품목 이름을 입력해주세요.");return;}db.ref("stockItems/"+safeKey(item)).set({name:item,active:true,createdAt:Date.now()}).then(()=>document.getElementById("newItemInput").value="").catch(e=>saveError("재고 품목",e));}
-function addStockLog(){if(!canWriteArea("operation"))return deny();const item=document.getElementById("stockItemSelect").value,type=document.querySelector('input[name="stockType"]:checked').value,qty=n("stockQty"),date=document.getElementById("stockDate").value||today();if(!item){alert("품목을 선택해주세요.");return;}if(!qty){alert("수량을 입력해주세요.");return;}const id=newId(),log={id,date,item,type,qty,linkedSaleId:"",createdAt:Date.now()};db.ref("stockLogs/"+id).set(log).then(()=>document.getElementById("stockQty").value="").catch(e=>saveError("재고 기록",e));}
-function renderStock(){const items=effectiveStockItems(),sel=document.getElementById("stockItemSelect");sel.innerHTML=items.map(item=>`<option>${escapeHtml(item)}</option>`).join("");const stock={};items.forEach(item=>stock[item]=0);stockLogs.forEach(l=>{if(!stock.hasOwnProperty(l.item))stock[l.item]=0;stock[l.item]+=l.type==="in"?Number(l.qty||0):-Number(l.qty||0);});document.getElementById("inventoryGrid").innerHTML=items.map(item=>`<div class="inv-card"><h3>${escapeHtml(item)}</h3><div class="d-value" style="color:${(stock[item]||0)<=3?"var(--danger)":(stock[item]||0)<=10?"var(--amber)":"var(--teal)"}">${stock[item]||0}개</div></div>`).join("");const tbody=document.getElementById("stockTableBody");tbody.innerHTML="";[...stockLogs].sort((a,b)=>sortByDateThenCreated(a,b,"date",false)).forEach(l=>tbody.innerHTML+=`<tr><td>${escapeHtml(l.date)}</td><td><b>${escapeHtml(l.item)}</b>${l.linkedSaleId?' <span class="period-badge">마트자동</span>':""}</td><td class="${l.type==="in"?"text-in":"text-out"}">${l.type==="in"?"입고":"판매"}</td><td>${Number(l.qty||0)}개</td></tr>`);}
+function applyRoleVisibility(){
+  const allTabs=['btnVault','btnMart','btnStock','btnTooth','btnMilk','btnLunch','btnAdmin'];
+  allTabs.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none'});
 
-function renderInspectionShells(){["tooth","milk","lunch"].forEach(type=>{const label=inspectionLabel(type);document.getElementById("tab-"+type).innerHTML=`<div class="section"><h2>${label} 기록</h2><div class="input-row"><select id="${type}Month" onchange="renderInspection('${type}')">${INSPECTION_MONTHS.map(m=>`<option value="${m}">2026년 ${m}월</option>`).join("")}</select><select id="${type}Period" onchange="renderInspection('${type}')"><option value="first">상반기</option><option value="second">하반기</option></select><button class="action-btn btn-blue" onclick="renderInspection('${type}')">달력 보기</button><button class="action-btn btn-teal" onclick="showInspectionCalc('${type}')">계산</button><button class="action-btn btn-amber" onclick="submitInspectionPayment('${type}')">금고로 송신</button></div><p class="small-note">체크 = 통과, 빈칸 = 미통과입니다. 저장 실패 시 경고창이 뜹니다.</p><div class="backup-help">${label} 기록을 JSON으로 저장하고 다시 불러올 수 있습니다.</div><div class="data-bar"><button class="action-btn btn-gray backup-btn" onclick="pickFile('${type}ImportFile')">저장한 ${label} 파일 불러오기</button><input type="file" id="${type}ImportFile" accept=".json" style="display:none" onchange="importInspectionFile(event,'${type}')"><button class="action-btn btn-blue backup-btn" onclick="downloadInspectionBackup('${type}')">${label} 기록 안전 저장</button></div><div class="table-wrap" id="${type}TableWrap"></div><div id="${type}Calc" class="section" style="margin-top:16px;display:none"></div></div>`;});}
-function getSchoolDays(month){const out=[];const last=new Date(2026,month,0).getDate();for(let d=1;d<=last;d++){const dt=new Date(2026,month-1,d),day=dt.getDay(),iso=`2026-${String(month).padStart(2,"0")}-${String(d).padStart(2,"0")}`;if(day!==0&&day!==6&&!HOLIDAYS_2026.has(iso))out.push(iso);}return out;}
-function getPeriodDates(month,period){const days=getSchoolDays(Number(month)),mid=Math.ceil(days.length/2);return period==="first"?days.slice(0,mid):days.slice(mid);}
-function getInspectionRecord(type,month,period,student,date){return !!((((inspectionRecords[type]||{})[month]||{})[period]||{})[safeKey(student)]||{})[date];}
-function setInspectionRecord(type,month,period,student,date,checked){if(!canWriteArea(type))return deny();const path=`inspectionRecords/${type}/${month}/${period}/${safeKey(student)}/${date}`;db.ref(path).set(checked?true:null).catch(e=>{saveError("검사 기록",e);renderInspection(type);});}
-function renderInspection(type){const monthEl=document.getElementById(type+"Month"),periodEl=document.getElementById(type+"Period"),wrap=document.getElementById(type+"TableWrap");if(!monthEl||!periodEl||!wrap)return;const month=monthEl.value||6,period=periodEl.value||"first",dates=getPeriodDates(month,period);if(!dates.length){wrap.innerHTML='<div class="small-note">표시할 등교일이 없습니다.</div>';return;}let html=`<div class="small-note" style="margin-bottom:8px">이 기간 검사일: ${dates.length}일</div><table class="inspect-table"><thead><tr><th>학생</th>${dates.map(d=>`<th>${shortDate(d)}</th>`).join("")}<th>통과</th><th>예상</th></tr></thead><tbody>`;STUDENTS.forEach(st=>{const cnt=dates.filter(d=>getInspectionRecord(type,month,period,st,d)).length,amount=baseReward(type,cnt,dates.length);html+=`<tr><td>${escapeHtml(st)}</td>${dates.map(d=>`<td><input class="inspect-check" type="checkbox" ${getInspectionRecord(type,month,period,st,d)?"checked":""} onchange="setInspectionRecord('${type}','${month}','${period}','${escapeAttr(st)}','${d}',this.checked)"></td>`).join("")}<td>${cnt}/${dates.length}</td><td>${amount?amount+"오구":""}</td></tr>`;});wrap.innerHTML=html+"</tbody></table>";}
-function baseReward(type,count,total){if(!total)return 0;if(type==="lunch"){if(count>=Math.ceil(total*.8))return 200;if(count>=Math.ceil(total*.5))return 100;return 0;}return count>=Math.ceil(total*.7)?100:0;}
-function calculateInspectionPayments(type){const month=document.getElementById(type+"Month").value,period=document.getElementById(type+"Period").value,dates=getPeriodDates(month,period),firstDates=getPeriodDates(month,"first"),secondDates=getPeriodDates(month,"second"),info=INSPECTION_INFO[type],items=[];STUDENTS.forEach(st=>{const cnt=dates.filter(d=>getInspectionRecord(type,month,period,st,d)).length;let amount=baseReward(type,cnt,dates.length),reason=`${info.label} ${month}월 ${period==="first"?"상반기":"하반기"} ${cnt}/${dates.length}일 통과`,bonus=0;if(period==="second"){const firstAll=firstDates.length>0&&firstDates.every(d=>getInspectionRecord(type,month,"first",st,d)),secondAll=secondDates.length>0&&secondDates.every(d=>getInspectionRecord(type,month,"second",st,d));if(firstAll&&secondAll){bonus=100;amount+=100;reason+=" + 상·하반기 전체 통과 보너스";}}if(amount>0)items.push({student:st,reason,amount,passCount:cnt,bonus});});return {type,month,period,title:`${info.label} ${month}월 ${period==="first"?"상반기":"하반기"} 지급`,items,totalAmount:items.reduce((s,i)=>s+i.amount,0)};}
-function showInspectionCalc(type){const res=calculateInspectionPayments(type),box=document.getElementById(type+"Calc");box.style.display="block";if(!res.items.length){box.innerHTML="<h2>계산 결과</h2><div class='small-note'>지급 대상이 없습니다.</div>";return;}box.innerHTML=`<h2>계산 결과 <span class="period-badge">${escapeHtml(res.title)}</span></h2><div class="small-note">지급 대상 ${res.items.length}명, 총 ${res.totalAmount.toLocaleString()}오구</div><div class="table-wrap"><table><thead><tr><th>학생</th><th>지급 사유</th><th>지급액</th></tr></thead><tbody>${res.items.map(i=>`<tr><td>${escapeHtml(i.student)}</td><td class="td-left">${escapeHtml(i.reason)}</td><td>${i.amount.toLocaleString()}오구</td></tr>`).join("")}</tbody></table></div>`;}
-function submitInspectionPayment(type){if(!canWriteArea(type))return deny();const res=calculateInspectionPayments(type);if(!res.items.length){alert("지급 대상이 없습니다.");return;}showInspectionCalc(type);if(!confirm(`${res.title}\n지급 대상 ${res.items.length}명, 총 ${res.totalAmount.toLocaleString()}오구를 금고로 송신할까요?`))return;const id=newId();db.ref("paymentRequests/"+id).set({...res,id,status:"pending",createdAt:Date.now(),sentBy:type}).then(()=>alert("금고로 송신했습니다.")).catch(e=>saveError("지급 요청",e));}
-function renderPaymentRequests(){const box=document.getElementById("paymentRequestList");if(!box)return;const pending=paymentRequests.filter(r=>r.status!=="done").sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));if(!pending.length){box.innerHTML='<div class="small-note">미처리 지급 요청이 없습니다.</div>';return;}box.innerHTML=pending.map(r=>`<div class="pay-request"><h3>${escapeHtml(r.title)} <span class="period-badge">${(r.items||[]).length}명 / ${Number(r.totalAmount||0).toLocaleString()}오구</span></h3><div class="table-wrap"><table><thead><tr><th>학생</th><th>사유</th><th>지급액</th></tr></thead><tbody>${(r.items||[]).map(i=>`<tr><td>${escapeHtml(i.student)}</td><td class="td-left">${escapeHtml(i.reason)}</td><td>${Number(i.amount||0).toLocaleString()}오구</td></tr>`).join("")}</tbody></table></div><button class="action-btn btn-blue btn-sm" onclick="processPaymentRequest('${r.id}')">지급 완료 및 금고 기록</button></div>`).join("");}
-function processPaymentRequest(id){if(!canWriteArea("operation"))return deny();const req=paymentRequests.find(r=>r.id===id);if(!req)return;if(!confirm(`${req.title}\n총 ${Number(req.totalAmount||0).toLocaleString()}오구를 지급 완료 처리할까요?`))return;const updates={};(req.items||[]).forEach(item=>{const logId=newId(),bills=amountToBills(Number(item.amount||0));updates["vaultLogs/"+logId]={id:logId,date:today(),student:item.student,desc:req.title+" - "+item.reason,type:"expense",...bills,amount:Number(item.amount||0),createdAt:Date.now()+Math.floor(Math.random()*100000)};});updates["paymentRequests/"+id+"/status"]="done";updates["paymentRequests/"+id+"/processedAt"]=Date.now();db.ref().update(updates).catch(e=>saveError("지급 처리",e));}
-function amountToBills(amount){let rest=amount,b1000=Math.floor(rest/1000);rest%=1000;let b500=Math.floor(rest/500);rest%=500;let b100=Math.floor(rest/100);return {b1000,b500,b100};}
+  if(role==='teacher'){
+    allTabs.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=''});
+  }else if(role==='operator'){
+    ['btnVault','btnMart','btnStock'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=''});
+  }else if(role==='tooth'){
+    const el=document.getElementById('btnTooth'); if(el)el.style.display='';
+  }else if(role==='milk'){
+    const el=document.getElementById('btnMilk'); if(el)el.style.display='';
+  }else if(role==='lunch'){
+    const el=document.getElementById('btnLunch'); if(el)el.style.display='';
+  }
 
-function importVaultFile(event){readImportFile(event,file=>{let list=[];if(file.name.toLowerCase().endsWith(".json")){const data=JSON.parse(file.text);if(!Array.isArray(data))throw new Error("금고 JSON은 배열 형식이어야 합니다.");list=data.map(normalizeVaultEntry).filter(Boolean);}else{const rows=parseCSV(file.text);const headers=rows.shift().map(h=>String(h).trim());list=rows.map(r=>vaultFromCSV(headers,r)).filter(Boolean);}if(!list.length)return alert("불러올 금고 기록이 없습니다.");if(!confirm(`금고 기록 ${list.length}개를 추가할까요?`))return;const updates={};list.forEach(item=>updates["vaultLogs/"+item.id]=item);db.ref().update(updates).then(()=>alert("금고 기록을 불러왔습니다.")).catch(e=>saveError("금고 불러오기",e));});}
-function importMartFile(event){readImportFile(event,file=>{let list=[];if(file.name.toLowerCase().endsWith(".json")){const data=JSON.parse(file.text);if(!Array.isArray(data))throw new Error("마트 JSON은 배열 형식이어야 합니다.");list=data.map(normalizeMartEntry).filter(Boolean);}else{const rows=parseCSV(file.text);const headers=rows.shift().map(h=>String(h).trim());list=rows.map(r=>martFromCSV(headers,r)).filter(Boolean);}if(!list.length)return alert("불러올 마트 기록이 없습니다.");if(!confirm(`마트 판매 기록 ${list.length}개를 추가할까요? 재고 자동 차감은 새로 만들지 않습니다.`))return;const updates={};list.forEach(item=>updates["sales/"+item.id]=item);db.ref().update(updates).then(()=>alert("마트 기록을 불러왔습니다.")).catch(e=>saveError("마트 불러오기",e));});}
-function importStockFile(event){readImportFile(event,file=>{let itemSet={},list=[];if(file.name.toLowerCase().endsWith(".json")){const data=JSON.parse(file.text);(Array.isArray(data.items)?data.items:[]).forEach(item=>{if(item)itemSet[String(item)]=true;});list=(Array.isArray(data.logs)?data.logs:[]).map(normalizeStockEntry).filter(Boolean);}else{const rows=parseCSV(file.text);const headers=rows.shift().map(h=>String(h).trim());list=rows.map(r=>stockFromCSV(headers,r)).filter(Boolean);}list.forEach(l=>itemSet[l.item]=true);if(!list.length&&!Object.keys(itemSet).length)return alert("불러올 재고 자료가 없습니다.");if(!confirm(`재고 기록 ${list.length}개와 품목 ${Object.keys(itemSet).length}개를 추가할까요?`))return;const updates={};Object.keys(itemSet).forEach(item=>updates["stockItems/"+safeKey(item)]={name:item,active:true});list.forEach(item=>updates["stockLogs/"+item.id]=item);db.ref().update(updates).then(()=>alert("재고 자료를 불러왔습니다.")).catch(e=>saveError("재고 불러오기",e));});}
-function importInspectionFile(event,type){readImportFile(event,file=>{if(!canWriteArea(type))return deny();const data=JSON.parse(file.text),records=data.records||data;if(!records||typeof records!=="object"||Array.isArray(records))throw new Error("검사 JSON 형식이 올바르지 않습니다.");const label=inspectionLabel(type);if(!confirm(`${label} 기록을 적용할까요? 같은 날짜의 기존 체크는 백업 파일 값으로 덮어씁니다.`))return;db.ref("inspectionRecords/"+type).update(records).then(()=>alert(label+" 기록을 불러왔습니다.")).catch(e=>saveError(label+" 불러오기",e));});}
-function importFullBackupFile(event){readImportFile(event,file=>{if(role!=="teacher"){alert("전체 백업 불러오기는 교사 관리자만 할 수 있습니다.");return;}const data=JSON.parse(file.text),updates={};(Array.isArray(data.vaultLogs)?data.vaultLogs:[]).map(normalizeVaultEntry).filter(Boolean).forEach(item=>updates["vaultLogs/"+item.id]=item);(Array.isArray(data.salesData)?data.salesData:[]).map(normalizeMartEntry).filter(Boolean).forEach(item=>updates["sales/"+item.id]=item);(Array.isArray(data.stockLogs)?data.stockLogs:[]).map(normalizeStockEntry).filter(Boolean).forEach(item=>updates["stockLogs/"+item.id]=item);(Array.isArray(data.products)?data.products:[]).map(normalizeProductEntry).filter(Boolean).forEach(item=>updates["products/"+item.id]=item);(Array.isArray(data.stockItems)?data.stockItems:[]).forEach(item=>{if(item)updates["stockItems/"+safeKey(item)]={name:String(item),active:true};});if(data.inspectionRecords&&typeof data.inspectionRecords==="object"&&!Array.isArray(data.inspectionRecords))updates.inspectionRecords=data.inspectionRecords;if(Array.isArray(data.paymentRequests))data.paymentRequests.forEach(item=>{if(item&&item.id)updates["paymentRequests/"+item.id]=item;});const count=Object.keys(updates).length;if(!count)return alert("불러올 전체 백업 자료가 없습니다.");if(!confirm(`전체 백업 자료 ${count}개를 Firebase에 적용할까요?`))return;db.ref().update(updates).then(()=>alert("전체 백업을 불러왔습니다.")).catch(e=>saveError("전체 백업 불러오기",e));});}
-function readImportFile(event,handler){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{try{handler({name:file.name,text:e.target.result});}catch(err){alert("불러오기 실패: "+err.message);}event.target.value="";};reader.readAsText(file,"UTF-8");}
-function normalizeVaultEntry(x){if(!x)return null;const b1000=Number(x.b1000||x["1000오구(장)"]||x["1000권(장)"]||0),b500=Number(x.b500||x["500오구(장)"]||x["500권(장)"]||0),b100=Number(x.b100||x["100오구(장)"]||x["100권(장)"]||0),income=Number(x.income||x["수입(+)"]||0),expense=Number(x.expense||x["지출(-)"]||0),amount=Number(x.amount||income||expense||(b1000*1000+b500*500+b100*100));if(!amount)return null;return {id:newId(),date:String(x.date||x["날짜"]||today()),student:String(x.student||x["학생"]||""),desc:String(x.desc||x["내용"]||""),type:(String(x.type)==="expense"||expense>0)?"expense":"income",b1000,b500,b100,amount,createdAt:Date.now()+Math.floor(Math.random()*100000)};}
-function vaultFromCSV(headers,r){return normalizeVaultEntry(rowObj(headers,r));}
-function normalizeMartEntry(x){if(!x)return null;const total=Number(x.total||x.amount||x["금액"]||x["금액(오구)"]||0);if(!total||!(x.student||x["학생"]))return null;return {id:newId(),time:String(x.time||x["판매시간"]||x["시간"]||nowText()),student:String(x.student||x["학생"]||""),items:String(x.items||x["구매내역"]||x["구매 내역"]||""),total,createdAt:Date.now()+Math.floor(Math.random()*100000)};}
-function martFromCSV(headers,r){return normalizeMartEntry(rowObj(headers,r));}
-function normalizeStockEntry(x){if(!x)return null;const item=String(x.item||x["품목"]||"").trim(),qty=Number(x.qty||x["수량"]||0);if(!item||!qty)return null;const rawType=String(x.type||x["구분"]||"");return {id:newId(),date:String(x.date||x["날짜"]||today()),item,type:(rawType==="in"||rawType.indexOf("입고")>=0)?"in":"out",qty,linkedSaleId:String(x.linkedSaleId||""),createdAt:Date.now()+Math.floor(Math.random()*100000)};}
-function stockFromCSV(headers,r){return normalizeStockEntry(rowObj(headers,r));}
-function normalizeProductEntry(x){if(!x)return null;const name=String(x.name||x.productName||x.title||"").trim();if(!name)return null;return {id:newId(),name,price:Number(x.price||x.amount||0),stockItem:String(x.stockItem||x.item||name),active:x.active!==false,createdAt:Date.now()+Math.floor(Math.random()*100000)};}
+  document.querySelectorAll('.teacher-only').forEach(el=>el.style.display=role==='teacher'?'':'none');
+  const rs=document.getElementById('roleStatus'); if(rs)rs.textContent='현재 로그인: '+(ROLE_LABELS[role]||role||'미로그인');
+}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function logout(){firebase.auth().signOut()}
+function switchTab(name,btn){
+  try{
+    document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
+    const target=document.getElementById('tab-'+name);
+    if(!target)throw new Error('화면을 찾지 못했습니다: '+name);
+    target.classList.add('active');
+    if(btn)btn.classList.add('active');
+    if(['tooth','milk','lunch'].includes(name)){
+      if(typeof fillInspectionMonthSelects==="function")
+      if(typeof renderInspection==="function")renderInspection(name);
+    }
+  }catch(e){
+    const err=document.getElementById("loginError");
+    if(err && document.getElementById("loginScreen").style.display!=="none")err.textContent="화면 전환 오류: "+e.message;
+    console.error(e);
+  }
+}
+window.switchTab=switchTab;
+function fillStudentSelects(){const options='<option value="">-- 학생 선택 --</option>'+STUDENTS.map(s=>`<option>${escapeHtml(s)}</option>`).join('');document.getElementById('vaultStudent').innerHTML=options;document.getElementById('studentSelect').innerHTML=options.replace('-- 학생 선택 --','-- 구매한 학생 선택 --')}
+
+function updateVaultReasonOptions(){
+  const type=document.querySelector('input[name="vaultType"]:checked').value;
+  const sel=document.getElementById("vaultReason");
+  const current=sel.value;
+  const options=type==="income"?["발행","벌금","기타"]:["월급","부수입","기타"];
+  sel.innerHTML=options.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  if(options.includes(current))sel.value=current;
+  document.getElementById("vaultDesc").placeholder=sel.value==="기타"?"직접 입력해도 되고 비워도 됩니다":"추가 메모 선택사항";
+}
+document.addEventListener("change",function(e){
+  if(e.target&&e.target.id==="vaultReason"){
+    document.getElementById("vaultDesc").placeholder=e.target.value==="기타"?"직접 입력해도 되고 비워도 됩니다":"추가 메모 선택사항";
+  }
+});
+
+function canWriteArea(area){
+  if(role==='teacher')return true;
+  if(area==='operation')return role==='operator';
+  if(area==='tooth')return role==='tooth';
+  if(area==='milk')return role==='milk';
+  if(area==='lunch')return role==='lunch';
+  return false;
+}
+function deny(){alert('이 역할에는 저장 권한이 없습니다.');}
+function calcVaultTotal(){const b1000=n('bill1000'),b500=n('bill500'),b100=n('bill100');document.getElementById('vaultCalc').textContent=(b1000*1000+b500*500+b100*100).toLocaleString()}
+function addVault(){if(!canWriteArea('operation'))return deny();const b1000=n('bill1000'),b500=n('bill500'),b100=n('bill100'),amount=b1000*1000+b500*500+b100*100,student=document.getElementById('vaultStudent').value,desc=document.getElementById('vaultDesc').value.trim(),type=document.querySelector('input[name="vaultType"]:checked').value,date=document.getElementById('vaultDate').value||today();if(!desc){alert('내용을 입력해주세요.');return}if(!amount){alert('지폐 장수를 입력해주세요.');return}const id=newId(),entry={id,date,student,desc,type,b1000,b500,b100,amount,createdAt:Date.now()};vaultLogs.push(entry);renderVault();db.ref('vaultLogs/'+id).set(entry);document.getElementById('vaultMsg').textContent='저장 완료';setTimeout(()=>document.getElementById('vaultMsg').textContent='',1200);document.getElementById('vaultDesc').value='';document.getElementById('vaultStudent').value='';['bill1000','bill500','bill100'].forEach(id=>document.getElementById(id).value='');document.getElementById('vaultCalc').textContent='0'}
+function deleteVault(id){alert('안전을 위해 금고 기록 삭제 기능은 꺼져 있습니다. 잘못 입력한 기록은 선생님에게 알려주세요.')}
+function renderVault(){let total=0,t1000=0,t500=0,t100=0;const tbody=document.getElementById('vaultTableBody');tbody.innerHTML='';[...vaultLogs].sort((a,b)=>sortByDateThenCreated(a,b,'date',false)).forEach(e=>{if(e.type==='income'){total+=e.amount;t1000+=e.b1000;t500+=e.b500;t100+=e.b100}else{total-=e.amount;t1000-=e.b1000;t500-=e.b500;t100-=e.b100}const bills=[];if(e.b1000)bills.push('1천×'+e.b1000);if(e.b500)bills.push('5백×'+e.b500);if(e.b100)bills.push('1백×'+e.b100);tbody.innerHTML+=`<tr><td>${escapeHtml(e.date)}</td><td>${escapeHtml(e.student||'')}</td><td class="td-left">${escapeHtml(e.desc)}</td><td style="font-size:12px;color:var(--muted)">${escapeHtml(bills.join(', '))}</td><td class="text-income">${e.type==='income'? '+'+Number(e.amount).toLocaleString():''}</td><td class="text-expense">${e.type==='expense'? '-'+Number(e.amount).toLocaleString():''}</td></tr>`});document.getElementById('vaultTotal').textContent=total.toLocaleString()+' 오구';document.getElementById('cnt1000').textContent=t1000+'장';document.getElementById('cnt500').textContent=t500+'장';document.getElementById('cnt100').textContent=t100+'장'}
+
+async function restoreDefaultProducts(){
+  if(!canWriteArea('operation'))return deny();
+  if(!confirm('기본 마트 상품과 재고 품목을 다시 넣을까요?'))return;
+  try{
+    for(let i=0;i<DEFAULT_PRODUCTS.length;i++){
+      await db.ref('products/p'+i).set({...DEFAULT_PRODUCTS[i],active:true,createdAt:Date.now()+i});
+    }
+    for(let i=0;i<DEFAULT_STOCK_ITEMS.length;i++){
+      await db.ref('stockItems/s'+i).set({name:DEFAULT_STOCK_ITEMS[i],active:true,createdAt:Date.now()+i});
+    }
+    alert('기본 상품과 재고 품목을 복구했습니다.');
+  }catch(e){
+    alert('복구 실패: Firebase Rules에서 운영 계정의 쓰기 권한을 확인하세요. '+e.message);
+    console.error(e);
+  }
+}
+
+function effectiveProducts(){
+  return (products&&products.length)?products:DEFAULT_PRODUCTS.map((p,i)=>({id:'default_p'+i,...p,active:true,isDefault:true}));
+}
+function effectiveStockItems(){
+  return (stockItems&&stockItems.length)?stockItems:[...DEFAULT_STOCK_ITEMS];
+}
+function renderProducts(){
+  const grid=document.getElementById('productGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  const list=effectiveProducts();
+  if(!list.length){
+    grid.innerHTML='<div class="small-note">등록된 상품이 없습니다.</div>';
+    calcMart();
+    return;
+  }
+  list.forEach(p=>{
+    quantities[p.id]=quantities[p.id]||0;
+    grid.innerHTML+=`<div class="product-card"><div class="p-name">${escapeHtml(p.name)}</div><div class="p-price">${Number(p.price).toLocaleString()} 오구</div><div class="p-stock">재고: ${escapeHtml(p.stockItem||p.name)}</div><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button><input type="number" id="qty_${p.id}" class="qty-in" value="${quantities[p.id]}" min="0" oninput="manualQty('${p.id}')"><button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button></div></div>`;
+  });
+  calcMart();
+}
+function addProduct(){if(!canWriteArea('operation'))return deny();const name=document.getElementById('newProductName').value.trim(),price=parseInt(document.getElementById('newProductPrice').value),stockItem=document.getElementById('newProductStockItem').value.trim()||name;if(!name){alert('상품명을 입력해주세요.');return}if(isNaN(price)||price<0){alert('올바른 가격을 입력해주세요.');return}const id=newId(),p={id,name,price,stockItem,active:true,createdAt:Date.now()};products.push(p);renderProducts();db.ref('products/'+id).set(p);db.ref('stockItems/'+safeKey(stockItem)).set({name:stockItem,active:true});document.getElementById('newProductName').value='';document.getElementById('newProductPrice').value='';document.getElementById('newProductStockItem').value=''}
+function deleteProduct(id){alert('안전을 위해 상품 숨김 기능은 꺼져 있습니다. 상품 변경은 선생님에게 알려주세요.')}
+function changeQty(id,delta){quantities[id]=Math.max(0,(quantities[id]||0)+delta);const el=document.getElementById('qty_'+id);if(el)el.value=quantities[id];calcMart()}function manualQty(id){const el=document.getElementById('qty_'+id);let v=parseInt(el.value)||0;if(v<0){v=0;el.value=0}quantities[id]=v;calcMart()}function calcMart(){let total=0;products.forEach(p=>total+=(quantities[p.id]||0)*Number(p.price||0));document.getElementById('currentTotal').textContent=total.toLocaleString();return total}
+function processSale(){const student=document.getElementById('studentSelect').value,total=calcMart();if(!student){alert('구매한 학생을 선택해주세요.');return}if(!total){alert('구매할 물건을 선택해주세요.');return}const selected=[];effectiveProducts().forEach(p=>{const qty=quantities[p.id]||0;if(qty>0)selected.push({...p,qty})});const saleId=newId(),time=nowText(),items=selected.map(p=>`${p.name} ${p.qty}개`).join(', '),sale={id:saleId,time,student,items,total,createdAt:Date.now()};salesData.push(sale);renderMart();const updates={};updates['sales/'+saleId]=sale;selected.forEach(p=>{const logId=newId(),stockItem=p.stockItem||p.name;updates['stockItems/'+safeKey(stockItem)]={name:stockItem,active:true};updates['stockLogs/'+logId]={id:logId,date:today(),item:stockItem,type:'out',qty:p.qty,linkedSaleId:saleId,createdAt:Date.now()}});db.ref().update(updates);document.getElementById('studentSelect').value='';quantities={};renderProducts()}
+function deleteSale(id){alert('안전을 위해 마트 판매 취소 기능은 꺼져 있습니다. 잘못 입력한 기록은 선생님에게 알려주세요.')}
+function renderMart(){const tbody=document.getElementById('martTableBody');tbody.innerHTML='';let grand=0;[...salesData].sort((a,b)=>sortBySaleTimeThenCreated(a,b,false)).forEach(s=>{grand+=Number(s.total||0);tbody.innerHTML+=`<tr><td>${escapeHtml(s.time)}</td><td style="font-weight:bold">${escapeHtml(s.student)}</td><td class="td-left">${escapeHtml(s.items)}</td><td style="color:var(--amber);font-weight:bold">${Number(s.total||0).toLocaleString()} 오구</td></tr>`});document.getElementById('martTotal').textContent=grand.toLocaleString()+' 오구'}
+function addStockItem(){if(!canWriteArea('operation'))return deny();const item=document.getElementById('newItemInput').value.trim();if(!item){alert('품목 이름을 입력해주세요.');return}db.ref('stockItems/'+safeKey(item)).set({name:item,active:true});document.getElementById('newItemInput').value=''}function deleteStockItem(item){alert('안전을 위해 재고 품목 숨김 기능은 꺼져 있습니다. 품목 변경은 선생님에게 알려주세요.')}
+function addStockLog(){if(!canWriteArea('operation'))return deny();const item=document.getElementById('stockItemSelect').value,type=document.querySelector('input[name="stockType"]:checked').value,qty=n('stockQty'),date=document.getElementById('stockDate').value||today();if(!item){alert('품목을 선택해주세요.');return}if(!qty){alert('수량을 입력해주세요.');return}const id=newId(),log={id,date,item,type,qty,linkedSaleId:'',createdAt:Date.now()};stockLogs.push(log);renderStock();db.ref('stockLogs/'+id).set(log);document.getElementById('stockQty').value=''}function deleteStockLog(id){alert('안전을 위해 재고 기록 삭제 기능은 꺼져 있습니다. 잘못 입력한 기록은 선생님에게 알려주세요.')}
+function renderStock(){
+  const items=effectiveStockItems();
+  const sel=document.getElementById('stockItemSelect');
+  if(sel)sel.innerHTML=items.map(item=>`<option>${escapeHtml(item)}</option>`).join('');
+  const stock={};
+  items.forEach(item=>stock[item]=0);
+  stockLogs.forEach(l=>{
+    if(!stock.hasOwnProperty(l.item))stock[l.item]=0;
+    stock[l.item]+=l.type==='in'?Number(l.qty||0):-Number(l.qty||0);
+  });
+  const grid=document.getElementById('inventoryGrid');
+  if(grid){
+    grid.innerHTML='';
+    items.forEach(item=>{
+      const cnt=stock[item]||0,color=cnt<=3?'var(--danger)':cnt<=10?'var(--amber)':'var(--teal)';
+      grid.innerHTML+=`<div class="inv-card" style="border-top-color:${color}"><h3>${escapeHtml(item)}</h3><div class="inv-count" style="color:${color}">${cnt}개</div></div>`;
+    });
+  }
+  const tbody=document.getElementById('stockTableBody');
+  if(tbody){
+    tbody.innerHTML='';
+    [...stockLogs].sort((a,b)=>sortByDateThenCreated(a,b,'date',false)).forEach(l=>{
+      const linked=l.linkedSaleId?' <span class="period-badge">마트자동</span>':'';
+      tbody.innerHTML+=`<tr><td>${escapeHtml(l.date)}</td><td style="font-weight:bold">${escapeHtml(l.item)}${linked}</td><td class="${l.type==="in"?"text-in":"text-out"}">${l.type==="in"?"입고 (+)":"판매 (-)"}</td><td>${Number(l.qty||0)}개</td></tr>`;
+    });
+  }
+  updateAdminSummary();
+}
+
+function updateAdminSummary(){
+  const v=document.getElementById("adminVaultCount");
+  const s=document.getElementById("adminSaleCount");
+  const st=document.getElementById("adminStockCount");
+  if(v)v.textContent=vaultLogs.length+"개";
+  if(s)s.textContent=salesData.length+"개";
+  if(st)st.textContent=stockLogs.length+"개";
+}
+
+const INSPECTION_INFO={tooth:{label:'양치검사',emoji:'🪥'},milk:{label:'우유검사',emoji:'🥛'},lunch:{label:'급식검사',emoji:'🍱'}};
+const INSPECTION_MONTHS=[6,7,8,9,10,11,12];
+const HOLIDAYS_2026=new Set(['2026-06-03','2026-06-06','2026-07-17','2026-07-22','2026-07-23','2026-07-24','2026-07-25','2026-07-26','2026-07-27','2026-07-28','2026-07-29','2026-07-30','2026-07-31','2026-08-01','2026-08-02','2026-08-03','2026-08-04','2026-08-05','2026-08-06','2026-08-07','2026-08-08','2026-08-09','2026-08-10','2026-08-11','2026-08-12','2026-08-13','2026-08-14','2026-08-15','2026-08-16','2026-08-17','2026-09-24','2026-09-25','2026-09-26','2026-09-28','2026-10-03','2026-10-05','2026-10-09','2026-12-25']);
+function fillInspectionMonthSelects(){
+  const months=(typeof INSPECTION_MONTHS!=='undefined')?INSPECTION_MONTHS:[6,7,8,9,10,11,12];
+  ['tooth','milk','lunch'].forEach(type=>{
+    const sel=document.getElementById(type+'Month');
+    if(!sel)return;
+    const current=sel.value;
+    sel.innerHTML=months.map(m=>`<option value="${m}">2026년 ${m}월</option>`).join('');
+    sel.value=current&&months.map(String).includes(String(current))?current:'6';
+  });
+}
+function getSchoolDays(month){const out=[];const last=new Date(2026,month,0).getDate();for(let d=1;d<=last;d++){const dt=new Date(2026,month-1,d);const day=dt.getDay();const iso=`2026-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;if(day!==0&&day!==6&&!HOLIDAYS_2026.has(iso))out.push(iso)}return out}
+function getPeriodDates(month,period){
+  const days=getSchoolDays(Number(month));
+  const mid=Math.ceil(days.length/2);
+  return period==='first'?days.slice(0,mid):days.slice(mid);
+}
+function getInspectionRecord(type,month,period,student,date){return !!((((inspectionRecords[type]||{})[month]||{})[period]||{})[safeKey(student)]||{})[date]}
+function setInspectionRecord(type,month,period,student,date,checked){if(!canWriteArea(type))return deny();const path=`inspectionRecords/${type}/${month}/${period}/${safeKey(student)}/${date}`;db.ref(path).set(checked?true:null)}
+function renderInspection(type){const monthEl=document.getElementById(type+'Month'),periodEl=document.getElementById(type+'Period'),wrap=document.getElementById(type+'TableWrap');if(!monthEl||!periodEl||!wrap)return;const month=monthEl.value||6,period=periodEl.value||'first',dates=getPeriodDates(month,period),info=INSPECTION_INFO[type];if(!dates.length){wrap.innerHTML='<div class="small-note">표시할 등교일이 없습니다.</div>';return}let html='<div class="small-note" style="margin-bottom:8px">이 기간 검사일: '+dates.length+'일</div><table class="inspect-table"><thead><tr><th>학생</th>'+dates.map(d=>`<th>${shortDate(d)}</th>`).join('')+'<th>통과</th><th>예상</th></tr></thead><tbody>';STUDENTS.forEach(st=>{const cnt=dates.filter(d=>getInspectionRecord(type,month,period,st,d)).length;const amount=baseReward(type,cnt,dates.length);html+=`<tr><td>${escapeHtml(st)}</td>`+dates.map(d=>`<td><input class="inspect-check" type="checkbox" ${getInspectionRecord(type,month,period,st,d)?'checked':''} onchange="setInspectionRecord('${type}','${month}','${period}','${escapeAttr(st)}','${d}',this.checked)"></td>`).join('')+`<td>${cnt}/${dates.length}</td><td>${amount?amount+'오구':''}</td></tr>`});html+='</tbody></table>';wrap.innerHTML=html}
+function baseReward(type,count,total){
+  if(!total)return 0;
+  if(type==='lunch'){
+    if(count>=Math.ceil(total*0.8))return 200;
+    if(count>=Math.ceil(total*0.5))return 100;
+    return 0;
+  }
+  if(type==='tooth'||type==='milk'){
+    return count>=Math.ceil(total*0.7)?100:0;
+  }
+  return 0;
+}
+function calculateInspectionPayments(type){const month=document.getElementById(type+'Month').value,period=document.getElementById(type+'Period').value,dates=getPeriodDates(month,period),firstDates=getPeriodDates(month,'first'),secondDates=getPeriodDates(month,'second'),info=INSPECTION_INFO[type];const items=[];STUDENTS.forEach(st=>{const cnt=dates.filter(d=>getInspectionRecord(type,month,period,st,d)).length;let amount=baseReward(type,cnt,dates.length),reason=`${info.label} ${month}월 ${period==='first'?'상반기':'하반기'} ${cnt}/${dates.length}일 통과`;let bonus=0;if(period==='second'){const firstAll=firstDates.length>0&&firstDates.every(d=>getInspectionRecord(type,month,'first',st,d));const secondAll=secondDates.length>0&&secondDates.every(d=>getInspectionRecord(type,month,'second',st,d));if(firstAll&&secondAll){bonus=100;amount+=100;reason+=' + 상·하반기 전체 통과 보너스'}}if(amount>0)items.push({student:st,reason,amount,passCount:cnt,bonus})});return {type,month,period,title:`${info.label} ${month}월 ${period==='first'?'상반기':'하반기'} 지급`,items,totalAmount:items.reduce((s,i)=>s+i.amount,0)}}
+function showInspectionCalc(type){const res=calculateInspectionPayments(type),box=document.getElementById(type+'Calc');box.style.display='block';if(!res.items.length){box.innerHTML='<h2>계산 결과</h2><div class="small-note">지급 대상이 없습니다.</div>';return}box.innerHTML=`<h2>계산 결과 <span class="period-badge">${escapeHtml(res.title)}</span></h2><div class="small-note">지급 대상 ${res.items.length}명, 총 ${res.totalAmount.toLocaleString()}오구</div><div class="table-wrap"><table><thead><tr><th>학생</th><th>지급 사유</th><th>지급액</th></tr></thead><tbody>`+res.items.map(i=>`<tr><td>${escapeHtml(i.student)}</td><td class="td-left">${escapeHtml(i.reason)}</td><td>${i.amount.toLocaleString()}오구</td></tr>`).join('')+'</tbody></table></div>'}
+function submitInspectionPayment(type){if(!canWriteArea(type))return deny();const res=calculateInspectionPayments(type);if(!res.items.length){alert('지급 대상이 없습니다.');return}showInspectionCalc(type);if(!confirm(`${res.title}\n지급 대상 ${res.items.length}명, 총 ${res.totalAmount.toLocaleString()}오구를 금고로 송신할까요?`))return;const id=newId();db.ref('paymentRequests/'+id).set({...res,id,status:'pending',createdAt:Date.now(),sentBy:type});alert('금고로 송신했습니다.')} 
+function renderPaymentRequests(){const box=document.getElementById('paymentRequestList');if(!box)return;const pending=paymentRequests.filter(r=>r.status!=='done').sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));if(!pending.length){box.innerHTML='<div class="small-note">미처리 지급 요청이 없습니다.</div>';return}box.innerHTML=pending.map(r=>`<div class="pay-request"><h3>${escapeHtml(r.title)} <span class="period-badge">${(r.items||[]).length}명 / ${Number(r.totalAmount||0).toLocaleString()}오구</span></h3><div class="table-wrap"><table class="pay-list"><thead><tr><th>학생</th><th>사유</th><th>지급액</th></tr></thead><tbody>${(r.items||[]).map(i=>`<tr><td>${escapeHtml(i.student)}</td><td class="td-left">${escapeHtml(i.reason)}</td><td>${Number(i.amount||0).toLocaleString()}오구</td></tr>`).join('')}</tbody></table></div><button class="action-btn btn-blue btn-sm" onclick="processPaymentRequest('${r.id}')">지급 완료 및 금고 기록</button></div>`).join('')}
+function processPaymentRequest(id){const req=paymentRequests.find(r=>r.id===id);if(!req)return;if(!confirm(`${req.title}\n총 ${Number(req.totalAmount||0).toLocaleString()}오구를 지급 완료 처리할까요?`))return;const updates={};(req.items||[]).forEach(item=>{const logId=newId(),bills=amountToBills(Number(item.amount||0));updates['vaultLogs/'+logId]={id:logId,date:today(),student:item.student,desc:req.title+' - '+item.reason,type:'expense',...bills,amount:Number(item.amount||0),createdAt:Date.now()+Math.floor(Math.random()*100000)}});updates['paymentRequests/'+id+'/status']='done';updates['paymentRequests/'+id+'/processedAt']=Date.now();db.ref().update(updates)}
+function amountToBills(amount){let rest=amount,b1000=Math.floor(rest/1000);rest%=1000;let b500=Math.floor(rest/500);rest%=500;let b100=Math.floor(rest/100);return {b1000,b500,b100}}
+function shortDate(iso){const [y,m,d]=String(iso).split('-');return Number(m)+'/'+Number(d)}
+function changePassword(which){alert('비밀번호는 Firebase Authentication에서 변경하세요.');}
+function resetPath(path,label){alert('안전을 위해 전체 초기화 기능은 꺼져 있습니다. 기존 Firebase 데이터는 건드리지 않습니다.')}function resetStockAll(){alert('안전을 위해 전체 초기화 기능은 꺼져 있습니다. 기존 Firebase 데이터는 건드리지 않습니다.')}
+function openStatsModal(){const daily={},items={};salesData.forEach(s=>{const date=String(s.time||'').split(' ')[0]||'날짜 없음';daily[date]=(daily[date]||0)+Number(s.total||0);String(s.items||'').split(', ').forEach(str=>{const m=str.match(/(.+)\s(\d+)개/);if(m)items[m[1].trim()]=(items[m[1].trim()]||0)+parseInt(m[2])})});document.getElementById('dailyStatsList').innerHTML=Object.keys(daily).sort().map(d=>`<li><span>${escapeHtml(d)}</span><span>${daily[d].toLocaleString()} 오구</span></li>`).join('');document.getElementById('itemStatsList').innerHTML=Object.entries(items).sort((a,b)=>b[1]-a[1]).map(([n,q])=>`<li><span>${escapeHtml(n)}</span><span>${q}개</span></li>`).join('');document.getElementById('statsModal').classList.add('open')}function closeStatsModal(){document.getElementById('statsModal').classList.remove('open')}
+
+function importVaultFile(event){
+  const file=event.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      let text=e.target.result;
+      let list=[];
+      if(file.name.toLowerCase().endsWith(".json")){
+        const data=JSON.parse(text);
+        if(!Array.isArray(data)) throw new Error("금고 JSON은 배열 형식이어야 합니다.");
+        list=data.map(x=>normalizeVaultEntry(x)).filter(Boolean);
+      }else{
+        const rows=parseCSV(text);
+        if(rows.length<2) throw new Error("CSV 내용이 비어 있습니다.");
+        const headers=rows[0].map(h=>String(h).trim());
+        list=rows.slice(1).map(r=>vaultFromCSV(headers,r)).filter(Boolean);
+      }
+      if(!list.length){alert("불러올 금고 기록이 없습니다.");return;}
+      if(!confirm("금고 기록 "+list.length+"개를 Firebase에 추가할까요? 기존 기록 뒤에 추가됩니다."))return;
+      const updates={};
+      list.forEach(item=>updates["vaultLogs/"+item.id]=item);
+      db.ref().update(updates).then(()=>alert("금고 기록을 불러왔습니다: "+list.length+"개"));
+    }catch(err){alert("불러오기 실패: "+err.message);}
+    event.target.value="";
+  };
+  reader.readAsText(file,"UTF-8");
+}
+
+function importMartFile(event){
+  const file=event.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const rows=parseCSV(e.target.result);
+      if(rows.length<2) throw new Error("CSV 내용이 비어 있습니다.");
+      const headers=rows[0].map(h=>String(h).trim());
+      const list=rows.slice(1).map(r=>martFromCSV(headers,r)).filter(Boolean);
+      if(!list.length){alert("불러올 마트 기록이 없습니다.");return;}
+      if(!confirm("마트 판매 기록 "+list.length+"개를 Firebase에 추가할까요? 재고 자동 차감은 새로 만들지 않고 판매 기록만 옮깁니다."))return;
+      const updates={};
+      list.forEach(item=>updates["sales/"+item.id]=item);
+      db.ref().update(updates).then(()=>alert("마트 기록을 불러왔습니다: "+list.length+"개"));
+    }catch(err){alert("불러오기 실패: "+err.message);}
+    event.target.value="";
+  };
+  reader.readAsText(file,"UTF-8");
+}
+
+function importStockFile(event){
+  const file=event.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      let text=e.target.result;
+      let itemSet={}, list=[];
+      if(file.name.toLowerCase().endsWith(".json")){
+        const data=JSON.parse(text);
+        if(data.items && Array.isArray(data.items)) data.items.forEach(item=>{if(item)itemSet[String(item)]=true;});
+        const logs=Array.isArray(data.logs)?data.logs:[];
+        list=logs.map(x=>normalizeStockEntry(x)).filter(Boolean);
+        list.forEach(l=>itemSet[l.item]=true);
+      }else{
+        const rows=parseCSV(text);
+        if(rows.length<2) throw new Error("CSV 내용이 비어 있습니다.");
+        const headers=rows[0].map(h=>String(h).trim());
+        list=rows.slice(1).map(r=>stockFromCSV(headers,r)).filter(Boolean);
+        list.forEach(l=>itemSet[l.item]=true);
+      }
+      if(!list.length && !Object.keys(itemSet).length){alert("불러올 재고 자료가 없습니다.");return;}
+      if(!confirm("재고 기록 "+list.length+"개와 품목 "+Object.keys(itemSet).length+"개를 Firebase에 추가할까요?"))return;
+      const updates={};
+      Object.keys(itemSet).forEach(item=>updates["stockItems/"+safeKey(item)]={name:item,active:true});
+      list.forEach(item=>updates["stockLogs/"+item.id]=item);
+      db.ref().update(updates).then(()=>alert("재고 자료를 불러왔습니다."));
+    }catch(err){alert("불러오기 실패: "+err.message);}
+    event.target.value="";
+  };
+  reader.readAsText(file,"UTF-8");
+}
+
+function normalizeVaultEntry(x){
+  if(!x)return null;
+  const b1000=Number(x.b1000||x["1000오구(장)"]||x["1000권(장)"]||0);
+  const b500=Number(x.b500||x["500오구(장)"]||x["500권(장)"]||0);
+  const b100=Number(x.b100||x["100오구(장)"]||x["100권(장)"]||0);
+  const income=Number(x.income||x["수입(+)"]||0);
+  const expense=Number(x.expense||x["지출(-)"]||0);
+  const amount=Number(x.amount||income||expense||(b1000*1000+b500*500+b100*100));
+  if(!amount)return null;
+  return {id:newId(),date:String(x.date||x["날짜"]||today()),student:String(x.student||x["학생"]||""),desc:String(x.desc||x["내용"]||""),type:(String(x.type)==="expense"||expense>0)?"expense":"income",b1000,b500,b100,amount,createdAt:Date.now()+Math.floor(Math.random()*100000)};
+}
+function vaultFromCSV(headers,r){
+  const o=rowObj(headers,r);
+  const b1000=Number(o["1000오구(장)"]||o["1000권(장)"]||o["1000오구"]||0);
+  const b500=Number(o["500오구(장)"]||o["500권(장)"]||o["500오구"]||0);
+  const b100=Number(o["100오구(장)"]||o["100권(장)"]||o["100오구"]||0);
+  const income=Number(o["수입(+)"]||0);
+  const expense=Number(o["지출(-)"]||0);
+  const amount=income||expense||(b1000*1000+b500*500+b100*100);
+  if(!amount)return null;
+  return {id:newId(),date:o["날짜"]||today(),student:o["학생"]||"",desc:o["내용"]||"",type:expense>0?"expense":"income",b1000,b500,b100,amount,createdAt:Date.now()+Math.floor(Math.random()*100000)};
+}
+function martFromCSV(headers,r){
+  const o=rowObj(headers,r);
+  const total=Number(o["금액"]||o["금액(오구)"]||0);
+  if(!total || !o["학생"])return null;
+  return {id:newId(),time:o["판매시간"]||o["시간"]||nowText(),student:o["학생"]||"",items:o["구매내역"]||o["구매 내역"]||"",total,createdAt:Date.now()+Math.floor(Math.random()*100000)};
+}
+function normalizeStockEntry(x){
+  if(!x)return null;
+  const item=String(x.item||x["품목"]||"").trim();
+  const qty=Number(x.qty||x["수량"]||0);
+  if(!item||!qty)return null;
+  const rawType=String(x.type||x["구분"]||"");
+  return {id:newId(),date:String(x.date||x["날짜"]||today()),item,type:(rawType==="in"||rawType.indexOf("입고")>=0)?"in":"out",qty,linkedSaleId:String(x.linkedSaleId||""),createdAt:Date.now()+Math.floor(Math.random()*100000)};
+}
+function stockFromCSV(headers,r){
+  const o=rowObj(headers,r);
+  const item=String(o["품목"]||"").trim();
+  const qty=Number(o["수량"]||0);
+  if(!item||!qty)return null;
+  const rawType=String(o["구분"]||"");
+  return {id:newId(),date:o["날짜"]||today(),item,type:rawType.indexOf("입고")>=0?"in":"out",qty,linkedSaleId:"",createdAt:Date.now()+Math.floor(Math.random()*100000)};
+}
 function rowObj(headers,row){const o={};headers.forEach((h,i)=>o[h]=row[i]||"");return o;}
-function parseCSV(text){if(text.charCodeAt(0)===0xFEFF)text=text.slice(1);const rows=[];let row=[],cur="",q=false;for(let i=0;i<text.length;i++){const ch=text[i],nx=text[i+1];if(ch==='"'&&q&&nx==='"'){cur+='"';i++;}else if(ch==='"'){q=!q;}else if(ch===","&&!q){row.push(cur);cur="";}else if((ch==="\n"||ch==="\r")&&!q){if(ch==="\r"&&nx==="\n")i++;row.push(cur);cur="";if(row.some(c=>String(c).trim()!==""))rows.push(row);row=[];}else cur+=ch;}row.push(cur);if(row.some(c=>String(c).trim()!==""))rows.push(row);return rows;}
+function parseCSV(text){
+  if(text.charCodeAt(0)===0xFEFF)text=text.slice(1);
+  const rows=[];let row=[],cur="",q=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i],nx=text[i+1];
+    if(ch==='"'&&q&&nx==='"'){cur+='"';i++;}
+    else if(ch==='"'){q=!q;}
+    else if(ch===','&&!q){row.push(cur);cur="";}
+    else if((ch==='\n'||ch==='\r')&&!q){
+      if(ch==='\r'&&nx==='\n')i++;
+      row.push(cur);cur="";
+      if(row.some(c=>String(c).trim()!==""))rows.push(row);
+      row=[];
+    }else cur+=ch;
+  }
+  row.push(cur);
+  if(row.some(c=>String(c).trim()!==""))rows.push(row);
+  return rows;
+}
+function exportVaultCSV(){let csv='\uFEFF날짜,학생,내용,1000오구(장),500오구(장),100오구(장),수입(+),지출(-)\n';vaultLogs.forEach(e=>csv+=[csvCell(e.date),csvCell(e.student||''),csvCell(e.desc),e.b1000,e.b500,e.b100,e.type==='income'?e.amount:'',e.type==='expense'?e.amount:''].join(',')+'\n');downloadBlob(csv,'text/csv','오구금고_장부_'+today()+'.csv')}function exportMartCSV(){let csv='\uFEFF판매시간,학생,구매내역,금액\n';salesData.forEach(s=>csv+=[csvCell(s.time),csvCell(s.student),csvCell(s.items),s.total].join(',')+'\n');downloadBlob(csv,'text/csv','오구마트_판매_'+today()+'.csv')}function exportStockCSV(){let csv='\uFEFF날짜,품목,구분,수량,비고\n';stockLogs.forEach(l=>csv+=[csvCell(l.date),csvCell(l.item),l.type==='in'?'입고':'판매',l.qty,l.linkedSaleId?'마트 자동':''].join(',')+'\n');downloadBlob(csv,'text/csv','오구재고_'+today()+'.csv')}
 
-function exportVaultCSV(){let csv="\uFEFF날짜,학생,내용,1000오구(장),500오구(장),100오구(장),수입(+),지출(-)\n";vaultLogs.forEach(e=>csv+=[csvCell(e.date),csvCell(e.student||""),csvCell(e.desc),e.b1000,e.b500,e.b100,e.type==="income"?e.amount:"",e.type==="expense"?e.amount:""].join(",")+"\n");downloadBlob(csv,"text/csv","오구금고_장부_"+today()+".csv");}
-function exportMartCSV(){let csv="\uFEFF판매시간,학생,구매내역,금액\n";salesData.forEach(s=>csv+=[csvCell(s.time),csvCell(s.student),csvCell(s.items),s.total].join(",")+"\n");downloadBlob(csv,"text/csv","오구마트_판매_"+today()+".csv");}
-function exportStockCSV(){let csv="\uFEFF날짜,품목,구분,수량,비고\n";stockLogs.forEach(l=>csv+=[csvCell(l.date),csvCell(l.item),l.type==="in"?"입고":"판매",l.qty,l.linkedSaleId?"마트 자동":""].join(",")+"\n");downloadBlob(csv,"text/csv","오구재고_"+today()+".csv");}
-function downloadInspectionBackup(type){downloadJSON("오구"+inspectionLabel(type)+"_백업",{kind:inspectionLabel(type),createdAt:new Date().toISOString(),records:(inspectionRecords&&inspectionRecords[type])||{}});}
-function getFullBackupData(){return {createdAt:new Date().toISOString(),vaultLogs,salesData,stockLogs,products,stockItems,inspectionRecords,paymentRequests};}
-function openStatsModal(){const daily={},items={};salesData.forEach(s=>{const date=String(s.time||"").split(" ")[0]||"날짜 없음";daily[date]=(daily[date]||0)+Number(s.total||0);String(s.items||"").split(", ").forEach(str=>{const m=str.match(/(.+)\s(\d+)개/);if(m)items[m[1].trim()]=(items[m[1].trim()]||0)+parseInt(m[2]);});});document.getElementById("dailyStatsList").innerHTML=Object.keys(daily).sort().map(d=>`<li>${escapeHtml(d)}: ${daily[d].toLocaleString()} 오구</li>`).join("");document.getElementById("itemStatsList").innerHTML=Object.entries(items).sort((a,b)=>b[1]-a[1]).map(([n,q])=>`<li>${escapeHtml(n)}: ${q}개</li>`).join("");document.getElementById("statsModal").classList.add("open");}
-function closeStatsModal(){document.getElementById("statsModal").classList.remove("open");}
-function updateAdminSummary(){const v=document.getElementById("adminVaultCount"),s=document.getElementById("adminSaleCount"),st=document.getElementById("adminStockCount");if(v)v.textContent=vaultLogs.length+"개";if(s)s.textContent=salesData.length+"개";if(st)st.textContent=stockLogs.length+"개";}
-
-function sortByDateThenCreated(a,b,key,asc){const av=dateKey(a&&a[key]),bv=dateKey(b&&b[key]);if(av!==bv)return asc?av-bv:bv-av;return asc?Number(a.createdAt||0)-Number(b.createdAt||0):Number(b.createdAt||0)-Number(a.createdAt||0);}
-function sortBySaleTimeThenCreated(a,b,asc){const av=saleTimeKey(a&&a.time,a&&a.createdAt),bv=saleTimeKey(b&&b.time,b&&b.createdAt);if(av!==bv)return asc?av-bv:bv-av;return asc?Number(a.createdAt||0)-Number(b.createdAt||0):Number(b.createdAt||0)-Number(a.createdAt||0);}
-function dateKey(v){const s=String(v||"").trim();let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(m)return Number(m[1])*10000+Number(m[2])*100+Number(m[3]);m=s.match(/^(\d{1,2})\/(\d{1,2})$/);if(m)return 20000000+Number(m[1])*100+Number(m[2]);const t=Date.parse(s);if(!isNaN(t)){const d=new Date(t);return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}return 99999999;}
-function saleTimeKey(time,createdAt){const s=String(time||"").trim(),m=s.match(/^(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2})$/);if(m)return 200000000000+Number(m[1])*1000000+Number(m[2])*10000+Number(m[3])*100+Number(m[4]);const t=Date.parse(s);return !isNaN(t)?t:Number(createdAt||9999999999999);}
-function setNet(state,text){const el=document.getElementById("netStatus");el.className="status "+state;el.textContent=text;}
-function saveError(label,e){alert(label+" 저장 실패: 인터넷 연결과 Firebase 규칙을 확인하세요. "+e.message);console.error(e);}
-function pickFile(id){document.getElementById(id).click();}
-function n(id){return parseInt(document.getElementById(id).value)||0;}
-function newId(){return Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8);}
-function today(){return new Date().toISOString().slice(0,10);}
-function nowText(){const d=new Date();return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,"0")}`;}
-function objToArray(obj){return obj?Object.keys(obj).map(k=>obj[k]).filter(Boolean):[];}
-function safeKey(s){return String(s).replace(/[.#$/\[\]]/g,"_");}
-function escapeHtml(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
-function escapeAttr(v){return escapeHtml(v).replaceAll("`","&#096;");}
-function csvCell(v){return '"'+String(v??"").replaceAll('"','""')+'"';}
-function downloadBlob(content,type,filename){const blob=new Blob([content],{type});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href);}
-function downloadJSON(name,data){downloadBlob(JSON.stringify(data,null,2),"application/json",name+"_"+today()+".json");}
-function inspectionLabel(type){return ({tooth:"양치검사",milk:"우유검사",lunch:"급식검사"}[type]||"검사");}
-</script>
-</body>
-</html>
+function sortByDateThenCreated(a,b,key,asc){
+  const av=dateKey(a&&a[key]);
+  const bv=dateKey(b&&b[key]);
+  if(av!==bv)return asc?av-bv:bv-av;
+  const ac=Number((a&&a.createdAt)||0);
+  const bc=Number((b&&b.createdAt)||0);
+  return asc?ac-bc:bc-ac;
+}
+function sortBySaleTimeThenCreated(a,b,asc){
+  const av=saleTimeKey(a&&a.time,a&&a.createdAt);
+  const bv=saleTimeKey(b&&b.time,b&&b.createdAt);
+  if(av!==bv)return asc?av-bv:bv-av;
+  const ac=Number((a&&a.createdAt)||0);
+  const bc=Number((b&&b.createdAt)||0);
+  return asc?ac-bc:bc-ac;
+}
+function dateKey(v){
+  const s=String(v||"").trim();
+  let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if(m)return Number(m[1])*10000+Number(m[2])*100+Number(m[3]);
+  m=s.match(/^(\d{1,2})\/(\d{1,2})$/);
+  if(m)return 20000000+Number(m[1])*100+Number(m[2]);
+  const t=Date.parse(s);
+  if(!isNaN(t)){
+    const d=new Date(t);
+    return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  }
+  return 99999999;
+}
+function saleTimeKey(time,createdAt){
+  const s=String(time||"").trim();
+  const m=s.match(/^(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2})$/);
+  if(m)return 200000000000+Number(m[1])*1000000+Number(m[2])*10000+Number(m[3])*100+Number(m[4]);
+  const t=Date.parse(s);
+  if(!isNaN(t))return t;
+  return Number(createdAt||9999999999999);
+}
+function setNet(state,text){const el=document.getElementById('netStatus');el.className='status '+state;el.textContent=text}function n(id){return parseInt(document.getElementById(id).value)||0}function newId(){return Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}function today(){return new Date().toISOString().slice(0,10)}function nowText(){const d=new Date();return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`}function objToArray(obj){return obj?Object.keys(obj).map(k=>obj[k]).filter(Boolean):[]}function safeKey(s){return String(s).replace(/[.#$/\[\]]/g,'_')}function escapeHtml(v){return String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}function escapeAttr(v){return escapeHtml(v).replaceAll('`','&#096;')}function csvCell(v){return '"'+String(v??'').replaceAll('"','""')+'"'}function downloadBlob(content,type,filename){const blob=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href)}function downloadJSON(name,data){downloadBlob(JSON.stringify(data,null,2),'application/json',name+'_'+today()+'.json')}function inspectionLabel(type){return ({tooth:'양치검사',milk:'우유검사',lunch:'급식검사'}[type]||'검사')}function downloadInspectionBackup(type){const label=inspectionLabel(type);downloadJSON('오구'+label+'_백업',{kind:label,createdAt:new Date().toISOString(),records:(inspectionRecords&&inspectionRecords[type])||{}})}function getFullBackupData(){return {createdAt:new Date().toISOString(),vaultLogs,salesData,stockLogs,products,stockItems,inspectionRecords,paymentRequests}}
+</script></body></html>
